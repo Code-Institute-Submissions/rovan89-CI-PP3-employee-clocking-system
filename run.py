@@ -16,4 +16,23 @@ in_out_sheet = SHEET.worksheet('in_out_sheet')
 
 data = in_out_sheet.get_all_values()
 
-print(data)
+#print(data)
+
+employeeList = [ {
+    "employeeNumber": "001",
+    "name": "John Doe",
+    "hourlyRate": "10.00"
+    },
+    {
+    "employeeNumber": "002",
+    "name": "Jane Doe",
+    "hourlyRate": "11.00"
+    }
+]
+
+#print(employeeList)
+print(employeeList[0]["employeeNumber"])
+
+#def main():
+
+#main
