@@ -19,12 +19,12 @@ data = in_out_sheet.get_all_values()
 #print(data)
 
 employeeList = [ {
-    "employeeNumber": "001",
+    "employeeNumber": 111,
     "name": "John Doe",
     "hourlyRate": "10.00"
     },
     {
-    "employeeNumber": "002",
+    "employeeNumber": 112,
     "name": "Jane Doe",
     "hourlyRate": "11.00"
     }
@@ -40,12 +40,15 @@ def options_menu():
     print("Please choose one of the following options:\n 1. Clock in \n 2. Clock out")
     options = input("Please enter the number that corresponds with the option you would like to choose: ")
 
-def employee_clock_in():
+
+
+list_of_numbers = []
+def list_of_employees_numbers():
     """
-    #############
+    Itterates throught employees numbers.
     """
-    employee_number = input("Please enter you employee number: ")
-    validate_employee_number(employee_number)
+    list_of_numbers =  [num["employeeNumber"] for num in employeeList]
+    return list_of_numbers
 
 def validate_employee_number(values):
     """
@@ -58,16 +61,41 @@ def validate_employee_number(values):
             raise ValueError(
                 f"3 values are required, you provided {len(values)}"
             )
-        else:
-            for i in employeeList:
-                if values != i["employeeNumber"]:
-                    raise ValueError(
-                        f"This is an incorrect employee number"
-                    )
+        return True
+        """
+        this part of the function is not working. 
+        Try to add functionality to check if the user enerted a correct user number.
+        """
+        for i in list_of_numbers:
+            print(i)
+            if values != i:
+                raise ValueError(
+                    f"This is an incorrect employee number"
+                )
+        return True
+
     except ValueError as e:
         print(f"Invalid entry: {e}, please try again\n ")
+        return False
+    
+    return False
+
+def employee_clock_in():
+    """
+    #############
+    """
+    while True:
+        employee_number = input("Please enter you employee number: ")
+        validate_employee_number(employee_number)
+
+        if validate_employee_number(employee_number):
+            print("Valid entry!")
+            break
 
 def main():
+    print(list_of_employees_numbers()) 
     options_menu()
     employee_clock_in()
+    print(list_of_employees_numbers()) 
+
 main()
