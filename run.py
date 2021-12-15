@@ -33,6 +33,13 @@ employeeList = [ {
 #print(employeeList)
 #print(employeeList[0]["employeeNumber"])
 
+def options_menu():
+    """ 
+    Gets chosen option from employee to clock in or out
+    """
+    print("Please choose one of the following options:\n 1. Clock in \n 2. Clock out")
+    options = input("Please enter the number that corresponds with the option you would like to choose: ")
+
 def employee_clock_in():
     """
     #############
@@ -44,7 +51,7 @@ def validate_employee_number(values):
     """
     Rasises ValueError if value is not an int.
     Checks if there is exactly 3 values.
-    Checks if this is a valid employee number
+    Checks if this is a valid employee number.
     """
     try:
         if len(values) != 3:
@@ -60,9 +67,7 @@ def validate_employee_number(values):
     except ValueError as e:
         print(f"Invalid entry: {e}, please try again\n ")
 
-#for i in employeeList:
- #   print(i["employeeNumber"])
-
 def main():
+    options_menu()
     employee_clock_in()
 main()
