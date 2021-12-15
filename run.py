@@ -34,9 +34,27 @@ employeeList = [ {
 #print(employeeList[0]["employeeNumber"])
 
 def employee_clock_in():
+    """
+    #############
+    """
     employee_number = input("Please enter you employee number: ")
-    
-employee_clock_in()
-#def main():
+    validate_employee_number(employee_number)
 
-#main()
+def validate_employee_number(values):
+    """
+    Rasises ValueError if value is not an int.
+    Checks if there is exactly 3 values.
+    Checks if this is a valid employee number
+    """
+    try:
+        if len(values) != 3:
+            raise ValueError(
+                f"3 values are required, you provided {len(values)}"
+            )
+    except ValueError as e:
+        print(f"Invalid entry: {e}, please try again\n ")
+
+
+def main():
+    employee_clock_in()
+main()
