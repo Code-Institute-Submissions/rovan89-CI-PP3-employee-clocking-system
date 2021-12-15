@@ -51,9 +51,17 @@ def validate_employee_number(values):
             raise ValueError(
                 f"3 values are required, you provided {len(values)}"
             )
+        else:
+            for i in employeeList:
+                if values != i["employeeNumber"]:
+                    raise ValueError(
+                        f"This is an incorrect employee number"
+                    )
     except ValueError as e:
         print(f"Invalid entry: {e}, please try again\n ")
 
+#for i in employeeList:
+ #   print(i["employeeNumber"])
 
 def main():
     employee_clock_in()
