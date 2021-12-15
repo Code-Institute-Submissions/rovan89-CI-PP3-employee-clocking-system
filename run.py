@@ -31,8 +31,12 @@ employeeList = [ {
 ]
 
 #print(employeeList)
-print(employeeList[0]["employeeNumber"])
+#print(employeeList[0]["employeeNumber"])
 
+def employee_clock_in():
+    employee_number = input("Please enter you employee number: ")
+    
+employee_clock_in()
 #def main():
 
-#main
+#main()
