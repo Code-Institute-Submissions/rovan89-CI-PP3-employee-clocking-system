@@ -11,3 +11,5 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('employee_clocking_system')
+
+in_out_sheet = SHEET.worksheet('in_out_sheet')
