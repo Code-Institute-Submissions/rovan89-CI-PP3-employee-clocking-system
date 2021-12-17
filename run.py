@@ -54,18 +54,12 @@ def validate_employee_number_count(values):
     Checks if there is exactly 3 values.
     Checks if this is a valid employee number.
     """
-    list_of_employees_numbers()
     try:
         if len(values) != 3:
             raise ValueError(
                 f"3 values are required, you provided {len(values)}"
             )
         return False
-
-        """
-        this part of the function is not working. 
-        Try to add functionality to check if the user enerted a correct user number.
-        """
 
     except ValueError as e:
         print(f"Invalid entry: {e}, please try again\n ")
@@ -74,12 +68,13 @@ def validate_employee_number_count(values):
     return True
 
 def validate_employee_number(values):
-    for i in list_of_numbers:
-        if values != [i]:
-            raise ValueError(
-                f"This is an incorrect employee number"
-               )
-        return False
+    print("V", values)
+    print(list_of_numbers)
+    for i in range(len(list_of_numbers)):
+        if i != values:
+            print("This is not =")
+        else: 
+            print("This is =")
 
 #for i in list_of_numbers:
  #       if values != [i]:
@@ -107,10 +102,10 @@ def employee_clock_in():
 #validate_employee_number(employee_number)
 
 def main():
-    print(list_of_numbers) 
     list_of_employees_numbers()
-    options_menu()
-    #employee_clock_in()
+    print(list_of_numbers) 
+    #options_menu()
+    employee_clock_in()
     print(list_of_numbers) 
 
 main()
