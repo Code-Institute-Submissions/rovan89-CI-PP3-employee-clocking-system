@@ -65,26 +65,24 @@ def validate_employee_number_count(values):
         return False
     
     return True
-
+"""
 def validate_employee_number(values):
-    """
-    Checks if this is a valid employee number.
-    """
+
     try:
         for i in range(len(list_of_numbers)):
             if list_of_numbers[i] != int(values):
-                print("This is not =" , list_of_numbers[i])
+                print("This is not = ", list_of_numbers[i])
                 raise ValueError(
-                f"This is an incorrect employee number, you provided {values}"
-            )
-            return False
+                f"***This is an incorrect employee number, you provided {values}"
+                )
+            return True
 
     except ValueError as e: 
             print(f"Invalid entry: {e}, please try again\n ")
-            return False
+            return True
     
-    return True
-
+    return False
+"""
 
 #for i in list_of_numbers:
  #       if values != [i]:
@@ -93,23 +91,44 @@ def validate_employee_number(values):
     #           )
      #   print([i])
 
+def test(values):
+    for i in range(len(list_of_numbers)):
+        if list_of_numbers[i] != int(values):
+            print("test This is = ", list_of_numbers[i])
+            return True
+        else:
+            return False
 
 def employee_clock_in():
     """
     #############
     """
     while True:
+        print("***Step 1: Input")
         employee_number = input("Please enter you employee number: ")
+        print("***Step 1: Input accepted")
+        print("***Step 2: Checking amount of numbers entered")
         validate_employee_number_count(employee_number)
-        validate_employee_number(employee_number)
+        print("***Step 2: amount check completed")
+        print("***Step 3: Test current employee number check starting")
+        test(employee_number)
+        print("***Step 3: Test current employee number check completed")
+        #print("***Step 4: OLD current employee number check starting")
+        #validate_employee_number(employee_number)
+        #print("***Step 4: OLD current employee number check completed***")
 
-        if validate_employee_number_count(employee_number):
+        if validate_employee_number_count(employee_number) and validate_employee_number(employee_number):
             print("Valid entry!")
             break
 
 
+ 
+
+
 #employee_number = input("Please enter you employee number: ")
 #validate_employee_number(employee_number)
+
+
 
 def main():
     list_of_employees_numbers()
