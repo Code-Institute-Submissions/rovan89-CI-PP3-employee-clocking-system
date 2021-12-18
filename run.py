@@ -68,13 +68,21 @@ def validate_employee_number_count(values):
     return True
 
 def validate_employee_number(values):
-    print("V", values)
-    print(list_of_numbers)
-    for i in range(len(list_of_numbers)):
-        if i != values:
-            print("This is not =")
-        else: 
-            print("This is =")
+    try:
+        for i in range(len(list_of_numbers)):
+            if list_of_numbers[i] != int(values):
+                print("This is not =" , list_of_numbers[i])
+                raise ValueError(
+                f"This is an incorrect employee number, you provided {len(values)}"
+            )
+            return False
+
+    except ValueError as e: 
+           print(f"Invalid entry: {e}, please try again\n ")
+    return False
+    
+    return True
+
 
 #for i in list_of_numbers:
  #       if values != [i]:
