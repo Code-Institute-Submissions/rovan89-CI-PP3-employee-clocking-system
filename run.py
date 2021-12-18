@@ -52,7 +52,6 @@ def validate_employee_number_count(values):
     """
     Rasises ValueError if value is not an int.
     Checks if there is exactly 3 values.
-    Checks if this is a valid employee number.
     """
     try:
         if len(values) != 3:
@@ -68,18 +67,21 @@ def validate_employee_number_count(values):
     return True
 
 def validate_employee_number(values):
+    """
+    Checks if this is a valid employee number.
+    """
     try:
         for i in range(len(list_of_numbers)):
             if list_of_numbers[i] != int(values):
                 print("This is not =" , list_of_numbers[i])
                 raise ValueError(
-                f"This is an incorrect employee number, you provided {len(values)}"
+                f"This is an incorrect employee number, you provided {values}"
             )
             return False
 
     except ValueError as e: 
-           print(f"Invalid entry: {e}, please try again\n ")
-    return False
+            print(f"Invalid entry: {e}, please try again\n ")
+            return False
     
     return True
 
