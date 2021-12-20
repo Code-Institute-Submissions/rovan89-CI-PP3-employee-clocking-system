@@ -44,15 +44,15 @@ class newEmployee:
 
     def addingEmployeeDetails(self):
         employee = {
-            "employeeNumber": f"{self.employeeNumber}",
+            "employeeNumber": int(f"{self.employeeNumber}"),
             "name": f"{self.name}",
             "hourlyRate": f"{self.hourlyRate}"
             }
         employeeList.append(employee)
 
 last_employee_in_employeeList = employeeList[-1]["employeeNumber"]
-add_one_to_employee_number = int(last_employee_in_employeeList+1 )
-print("***", add_one_to_employee_number)
+add_one_to_employee_number = int(last_employee_in_employeeList+1)
+print("***", int(add_one_to_employee_number))
 
 
 entering_name = input("Please enter employee name: ")
