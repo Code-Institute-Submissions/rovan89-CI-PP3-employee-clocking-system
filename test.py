@@ -61,7 +61,7 @@ newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name, enter
 print("This is the new employee number: " , newEmployeedAdded.employeeNumber)
 print("This is the new employee's name: ", newEmployeedAdded.name)
 print("This is the new employee hourly rate: ", newEmployeedAdded.hourlyRate)
-print(">>>", newEmployeedAdded.addingEmployeeDetails())
+print("You have added a new employee to the database >>>", newEmployeedAdded.addingEmployeeDetails())
 
 
 print(employeeList)
