@@ -32,10 +32,20 @@ employeeList = [ {
 
 def options_menu():
     """ 
-    Gets chosen option from employee to clock in or out
+    Gives user an options menu
     """
-    print("Please choose one of the following options:\n 1. Clock in \n 2. Clock out")
+    print("Please choose one of the following options:\n 1. Clock in \n 2. Clock out\n 3. Add new employee to system")
     options = input("Please enter the number that corresponds with the option you would like to choose: ")
+    print(options)
+    if int(options) == 1:
+        main()
+    elif int(options) == 2:
+        clockout()
+    elif int(options) == 3:
+        adding_new_employee()
+    else:
+        print("***You can only choose one of the given options, please enter a valid number***")
+        options_menu()
 
 #Employee validation
 
