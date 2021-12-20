@@ -38,14 +38,20 @@ def options_menu():
     options = input("Please enter the number that corresponds with the option you would like to choose: ")
     print(options)
     if int(options) == 1:
-        main()
+        clock_in()
     elif int(options) == 2:
-        clockout()
+        clock_out()
     elif int(options) == 3:
         adding_new_employee()
     else:
         print("***You can only choose one of the given options, please enter a valid number***")
         options_menu()
+
+def clock_out():
+    print("Running Clockout")
+
+def adding_new_employee():
+    print("Running adding_new_employee()")
 
 #Employee validation
 
@@ -163,19 +169,20 @@ def adding_new_employee():
     print("This is the new employee number: " , newEmployeedAdded.employeeNumber)
     print("This is the new employee's name: ", newEmployeedAdded.name)
     print("This is the new employee hourly rate: ", newEmployeedAdded.hourlyRate)
-    print("You have added a new employee to the database >>>", newEmployeedAdded.addingEmployeeDetails())
+    return newEmployeedAdded.addingEmployeeDetails()
+    print("You have added a new employee to the database >>>", employeeList)
 
-adding_new_employee()
+
 #employee_number = input("Please enter you employee number: ")
 #validate_employee_number(employee_number)
 
 
 
-def main():
+def clock_in():
     list_of_employees_numbers()
     print(list_of_numbers) 
     #options_menu()
     employee_clock_in()
     print(list_of_numbers) 
 
-main()
+options_menu()

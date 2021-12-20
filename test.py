@@ -7,9 +7,9 @@ def options_menu():
     options = input("Please enter the number that corresponds with the option you would like to choose: ")
     print(options)
     if int(options) == 1:
-        main()
+        clock_in()
     elif int(options) == 2:
-        clockout()
+        clock_out()
     elif int(options) == 3:
         adding_new_employee()
     else:
