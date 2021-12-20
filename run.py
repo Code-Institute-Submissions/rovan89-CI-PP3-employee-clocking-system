@@ -134,6 +134,13 @@ class newEmployee:
         self.name = name
         self.hourlyRate = hourlyRate
  
+    def addingEmployeeDetails(self):
+        employee = {
+            "employeeNumber": f"{self.employeeNumber}",
+            "name": f"{self.name}",
+            "hourlyRate": f"{self.hourlyRate}"
+            }
+        employeeList.append(employee)
 
 
 #employee_number = input("Please enter you employee number: ")
