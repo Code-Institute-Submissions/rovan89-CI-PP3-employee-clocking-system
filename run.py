@@ -121,7 +121,13 @@ def employee_clock_in():
             print("Valid entry!")
             break
 
+# Add new employee
 
+class newEmployee:
+    """
+    This class allows the user to enter the necessary values to create a new instance of an employee
+    and add it to the employeeList list. 
+    """
  
 
 
