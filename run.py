@@ -128,6 +128,11 @@ class newEmployee:
     This class allows the user to enter the necessary values to create a new instance of an employee
     and add it to the employeeList list. 
     """
+
+    def __init__(self, employeeNumber, name, hourlyRate):
+        self.employeeNumber = employeeNumber
+        self.name = name
+        self.hourlyRate = hourlyRate
  
 
 
