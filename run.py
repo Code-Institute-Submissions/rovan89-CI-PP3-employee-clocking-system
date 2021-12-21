@@ -69,18 +69,18 @@ def validate_employee_number_count(values):
     Rasises ValueError if value is not an int.
     Checks if there is exactly 3 values.
     """
-    try:
+    print(values)
+    try: 
         if len(values) != 3:
             raise ValueError(
                 f"3 values are required, you provided {len(values)}"
             )
-        return False
-
     except ValueError as e:
         print(f"Invalid entry: {e}, please try again\n ")
         return False
-    
+
     return True
+    
 """
 def validate_employee_number(values):
 
