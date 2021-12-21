@@ -54,7 +54,21 @@ def adding_new_employee():
     print("Running adding_new_employee()")
 
 #Employee validation
+def employee_input():
+    """
+    This function takes in the employee number
+    """
+    while True:
 
+        employee_number = input("Please enter you employee number: ")
+        validate_employee_number_count(employee_number)
+
+        if validate_employee_number_count(employee_number):
+            print("Employee number is valid!")
+            break
+
+    return employee_number
+    
 list_of_numbers = []
 def list_of_employees_numbers():
     """
@@ -80,7 +94,7 @@ def validate_employee_number_count(values):
         return False
 
     return True
-    
+
 """
 def validate_employee_number(values):
 
@@ -115,27 +129,7 @@ def test(values):
         else:
             return False
 
-def employee_clock_in():
-    """
-    #############
-    """
-    while True:
-        print("***Step 1: Input")
-        employee_number = input("Please enter you employee number: ")
-        print("***Step 1: Input accepted")
-        print("***Step 2: Checking amount of numbers entered")
-        validate_employee_number_count(employee_number)
-        print("***Step 2: amount check completed")
-        print("***Step 3: Test current employee number check starting")
-        test(employee_number)
-        print("***Step 3: Test current employee number check completed")
-        #print("***Step 4: OLD current employee number check starting")
-        #validate_employee_number(employee_number)
-        #print("***Step 4: OLD current employee number check completed***")
 
-        if validate_employee_number_count(employee_number) and validate_employee_number(employee_number):
-            print("Valid entry!")
-            break
 
 # Add new employee
 

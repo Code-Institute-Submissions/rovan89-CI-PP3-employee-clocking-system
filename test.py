@@ -1,3 +1,6 @@
+from datetime import datetime
+
+#Options Menu
 
 def options_menu():
     """ 
@@ -16,6 +19,7 @@ def options_menu():
         print("***You can only choose one of the given options, please enter a valid number***")
         options_menu()
 
+#Employee CLock-in Validation and timestamp
 def clock_in():
     print("Running Clock in function")
     employee_input()
@@ -58,8 +62,23 @@ def validate_employee_number_count(values):
 
     return True
 
+def clock_in_time():
+    time_now = datetime.now()
+    current_time = time_now.strftime("%H:%M")
+    print(current_time)
+    current_time = current_time.split(':')
+    print(current_time)
+    current_time = [int(time) for time in current_time]
+    print(current_time)
+
+    return current_time
+
+clock_in = clock_in_time()
+print(clock_in)
+
+def update_in_out_sheet(clock_in):
+    pass
     
-
-
-employee_input()
+update_in_out_sheet(clock_in_time)
 #options_menu()
+    
