@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from datetime import datetime
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -61,6 +62,13 @@ def find_employee_details():
         else:
             print("is not = \n")
 
+# Clock in system
+def clock_in_time():
+    time_now = datetime.now()
+    current_time = time_now.strftime("%H:%M")
+
+    return current_time
+    
 #Update Google Sheets
 
 def update_sales_worksheet(data):
@@ -72,13 +80,15 @@ def update_sales_worksheet(data):
     sales_worksheet.append_row(data)
     print("Sales worksheet updated successfully.\n")
 
+
 def transfer_of_data():
     """
     Takes data in and formats to list.
     Updates csv file
     """
-    data = find_employee_details()
-    csv_result = [data]
+    employee_input = find_employee_details()
+    clockin_time = clock_in_time()
+    csv_result = [employee_input, clockin_time]
     update_sales_worksheet(csv_result)
 
 def main():
