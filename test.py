@@ -1,4 +1,36 @@
 from datetime import datetime
+import gspread
+from google.oauth2.service_account import Credentials
+
+# Link to Google Sheets
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('employee_clocking_system')
+
+in_out_sheet = SHEET.worksheet('in_out_sheet')
+
+data = in_out_sheet.get_all_values()
+
+#List of employees and their details
+
+employeeList = [ {
+    "employeeNumber": 111,
+    "name": "John Doe",
+    "hourlyRate": "10.00"
+    },
+    {
+    "employeeNumber": 112,
+    "name": "Jane Doe",
+    "hourlyRate": "11.00"
+    }
+]
 
 #Options Menu
 
@@ -30,21 +62,6 @@ def clock_out():
 def adding_new_employee():
     print("Running adding_new_employee()")
 
-def employee_input():
-    """
-    This function takes in the employee number
-    """
-    while True:
-
-        employee_number = input("Please enter you employee number: ")
-        validate_employee_number_count(employee_number)
-
-        if validate_employee_number_count(employee_number):
-            print("Employee number is valid!")
-            break
-
-    return employee_number
-
 def validate_employee_number_count(values):
     """
     Rasises ValueError if value is not an int.
@@ -62,6 +79,30 @@ def validate_employee_number_count(values):
 
     return True
 
+def employee_input():
+    """
+    This function takes in the employee number
+    """
+    while True:
+
+        employee_number = input("Please enter you employee number: ")
+        validate_employee_number_count(employee_number)
+
+        if validate_employee_number_count(employee_number):
+            print("Employee number is valid!")
+            break
+
+    return int(employee_number)
+
+returned_input = type(employee_input())
+print("!!!",returned_input)
+test_list = []
+test_list.append("Hi")
+print(test_list)
+
+
+
+# Clock in system
 def clock_in_time():
     time_now = datetime.now()
     current_time = time_now.strftime("%H:%M")
@@ -73,12 +114,17 @@ def clock_in_time():
 
     return current_time
 
-clock_in = clock_in_time()
+timestamp_in = clock_in_time()
+entered_number_by_employee = employee_input()
+print(">>>", entered_number_by_employee)
 print(clock_in)
 
-def update_in_out_sheet(clock_in):
-    pass
-    
+def update_in_out_sheet(timestamp_in):
+    print("Updating in_out_sheet clock-in time...")
+    clocking_sheet = SHEET.worksheet("in_out_sheet")
+    clocking_sheet.append_row(entered_number_by_employee, timestamp_in)
+    print("Clock in time updated successfully")
 update_in_out_sheet(clock_in_time)
-#options_menu()
+
+options_menu()
     
