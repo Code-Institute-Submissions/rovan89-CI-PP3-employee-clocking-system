@@ -28,43 +28,41 @@ employeeList = [ {
     }
 ]
 
+#Employee Validation
 
-def employee_input():
-    employee_number = input("Please enter you employee number: ")
-    return int(employee_number)
-
-
-list_of_numbers = []
-def list_of_employees_numbers(employee_number):
+def list_of_employees_numbers():
     """
     Itterates throught employees numbers.
     """
-    for num in employeeList:
-        list_of_numbers.append(num["employeeNumber"])
-    return list_of_numbers
+    all_employees_numbers = [num["employeeNumber"] for num in employeeList if "employeeNumber" in num]
+    return all_employees_numbers
 
 
-
-class Clocking:
+def employee_input():
     """
-    This class will take three values for clocking in and out
-    1. Employee Number
-    2. Employee Name
-    3. clocking time
-    Then it will update the clocking sheet
+    Takes user input (Employee number)
     """
-
-    def __init__(self, employee_name, employee_number, clocking_time):
-        self.employee_name = employee_name
-        self.employee_number = employee_number
-        self.clocking_time = clocking_time
-
-    def update_sheet(self):
-        print(f"Name: {self.employee_name} Number: {self.employee_number} Time: {self.clocking_time}", )
-        print(self.employee_name, self.employee_number, self.clocking_time)
-        return self.employee_name, self.employee_number, self.clocking_time
+    employee_number = input("Please enter you employee number: ")
+    return int(employee_number)
         
-        
+
+def find_employee_details():
+    """
+    Takes return value from employee_input()
+    Then checks it against employeeNumber in employeeList
+    """
+    all_employees_numbers = list_of_employees_numbers()
+    entered_number_by_employee = employee_input()
+    for i in all_employees_numbers:
+        print("This is entered_number_by_employee: ", entered_number_by_employee)
+        if entered_number_by_employee is i:
+            print(f" {entered_number_by_employee} is = {i} \n")
+            return i
+        else:
+            print("is not = \n")
+
+#Update Google Sheets
+
 def update_sales_worksheet(data):
     """
     Update sales worksheet, add new row with the list data provided
@@ -79,13 +77,11 @@ def transfer_of_data():
     Takes data in and formats to list.
     Updates csv file
     """
-    data = employee_input()
+    data = find_employee_details()
     csv_result = [data]
     update_sales_worksheet(csv_result)
 
 def main():
-    #new_data_entry_by_user = Clocking.(employee_id, "Blank", "Blank2")
-    #print("new_data_entry_by_user: ", new_data_entry_by_user())
     transfer_of_data()
+    
 main()
-
