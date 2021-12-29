@@ -58,12 +58,16 @@ class newEmployee:
         self.hourlyRate = hourlyRate
 
         def addingEmployeeDetails(self):
-        employee = {
-            "employeeNumber": int(f"{self.employeeNumber}"),
-            "name": f"{self.name}",
-            "hourlyRate": f"{self.hourlyRate}"
-            }
-        employeeList.append(employee)
+            employee = {
+                "employeeNumber": int(f"{self.employeeNumber}"),
+                "name": f"{self.name}",
+                "hourlyRate": f"{self.hourlyRate}"
+                }
+            employeeList.append(employee)
+
+last_employee_in_employeeList = employeeList[-1]["employeeNumber"]
+add_one_to_employee_number = int(last_employee_in_employeeList+1)
+print("***", int(add_one_to_employee_number))
 
 #Employee validation
 def employee_input():
@@ -164,19 +168,14 @@ class newEmployee:
             }
         employeeList.append(employee)
 
-def adding_new_employee():
-    last_employee_in_employeeList = employeeList[-1]["employeeNumber"]
-    add_one_to_employee_number = int(last_employee_in_employeeList +1 )
-    print("***", add_one_to_employee_number)
-
+def add_new_employee():
     entering_name = input("Please enter employee name: ")
     entering_hourly_rate = input("Please enter employee hourly rate: ")
     newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name, entering_hourly_rate)
     print("This is the new employee number: " , newEmployeedAdded.employeeNumber)
     print("This is the new employee's name: ", newEmployeedAdded.name)
     print("This is the new employee hourly rate: ", newEmployeedAdded.hourlyRate)
-    return newEmployeedAdded.addingEmployeeDetails()
-    print("You have added a new employee to the database >>>", employeeList)
+    newEmployeedAdded.addingEmployeeDetails()
 
 
 #employee_number = input("Please enter you employee number: ")
