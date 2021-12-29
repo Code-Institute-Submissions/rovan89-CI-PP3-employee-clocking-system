@@ -51,8 +51,33 @@ def employee_input():
     """
     Takes user input (Employee number)
     """
-    employee_number = input("Please enter you employee number: ")
+    while True:
+
+        employee_number = input("Please enter you employee number: ")
+        validate_employee_number_count(employee_number)
+
+        if validate_employee_number_count(employee_number):
+            print("Employee number is valid!")
+            break
+
     return int(employee_number)
+
+def validate_employee_number_count(values):
+    """
+    Rasises ValueError if value is not an int.
+    Checks if there is exactly 3 values.
+    """
+    print(values)
+    try: 
+        if len(values) != 3:
+            raise ValueError(
+                f"3 values are required, you provided {len(values)}"
+            )
+    except ValueError as e:
+        print(f"Invalid entry: {e}, please try again\n ")
+        return False
+
+    return True
 
 #Find matching emplyee name to user entered employee number
 
