@@ -17,8 +17,6 @@ in_out_sheet = SHEET.worksheet('in_out_sheet')
 
 data = in_out_sheet.get_all_values()
 
-#print(data)
-
 employeeList = [ {
     "employeeNumber": 111,
     "name": "John Doe",
@@ -30,6 +28,8 @@ employeeList = [ {
     "hourlyRate": "11.00"
     }
 ]
+
+#User Options Menu
 
 def options_menu():
     """ 
@@ -73,7 +73,7 @@ print("***", int(add_one_to_employee_number))
 #Employee validation
 def employee_input():
     """
-    This function takes in the employee number
+    Takes user input (Employee number)
     """
     while True:
 
@@ -84,7 +84,7 @@ def employee_input():
             print("Employee number is valid!")
             break
 
-    return employeenumber
+    return int(employee_number)
     
 list_of_numbers = []
 def list_of_employees_numbers():
