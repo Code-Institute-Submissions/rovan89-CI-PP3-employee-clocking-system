@@ -28,7 +28,6 @@ employeeList = [ {
     "hourlyRate": "11.00"
     }
 ]
-
 #User Options Menu
 
 def options_menu():
@@ -48,29 +47,6 @@ def options_menu():
         print("***You can only choose one of the given options, please enter a valid number***")
         options_menu()
 
-class newEmployee:
-    """
-    This class allows the user to enter the necessary values to create a new instance of an employee
-    and add it to the employeeList list. 
-    """
-    def __init__(self, employeeNumber, name, hourlyRate):
-        self.employeeNumber = employeeNumber
-        self.name = name
-        self.hourlyRate = hourlyRate
-
-        def addingEmployeeDetails(self):
-            employee = {
-                "employeeNumber": int(f"{self.employeeNumber}"),
-                "name": f"{self.name}",
-                "hourlyRate": f"{self.hourlyRate}"
-                }
-            employeeList.append(employee)
-
-last_employee_in_employeeList = employeeList[-1]["employeeNumber"]
-add_one_to_employee_number = int(last_employee_in_employeeList+1)
-print("***", int(add_one_to_employee_number))
-
-#Employee validation
 def employee_input():
     """
     Takes user input (Employee number)
@@ -85,16 +61,7 @@ def employee_input():
             break
 
     return int(employee_number)
-    
-list_of_numbers = []
-def list_of_employees_numbers():
-    """
-    Itterates throught employees numbers.
-    """
-    for num in employeeList:
-        list_of_numbers.append(num["employeeNumber"])
-    return list_of_numbers
-1
+
 def validate_employee_number_count(values):
     """
     Rasises ValueError if value is not an int.
@@ -112,55 +79,79 @@ def validate_employee_number_count(values):
 
     return True
 
-"""
-def validate_employee_number(values):
+#Find matching emplyee name to user entered employee number
 
-    try:
-        for i in range(len(list_of_numbers)):
-            if list_of_numbers[i] != int(values):
-                print("This is not = ", list_of_numbers[i])
-                raise ValueError(
-                f"***This is an incorrect employee number, you provided {values}"
-                )
-            return True
+def itterates_employee_name():
+    """
+    Itterates throught employees names.
+    """
+    all_employees_names = [name["name"] for name in employeeList if "name" in name]
+    print("-->",all_employees_names)
+    return all_employees_names
 
-    except ValueError as e: 
-            print(f"Invalid entry: {e}, please try again\n ")
-            return True
-    
-    return False
-"""
+def list_of_employees_numbers():
+    """
+    Itterates throught employees numbers.
+    """
+    all_employees_numbers = [num["employeeNumber"] for num in employeeList if "employeeNumber" in num]
+    print("-->", all_employees_numbers)
+    return all_employees_numbers
 
-#for i in list_of_numbers:
- #       if values != [i]:
-  #          raise ValueError(
-   #             f"This is an incorrect employee number"
-    #           )
-     #   print([i])
-
-def test(values):
-    for i in range(len(list_of_numbers)):
-        if list_of_numbers[i] != int(values):
-            print("test This is = ", list_of_numbers[i])
-            return True
+def itterate_through_employee_details(employee_number):
+    for l, n in zip(list_of_employees_numbers(), itterates_employee_name()):
+        if employee_number is l:
+            employee_details = [l , n]
+            print(">>>", employee_details)
+            return employee_details
         else:
-            return False
+            continue
+
+# Clock in system
+def clock_in_time():
+    time_now = datetime.now()
+    current_time = time_now.strftime("%H:%M")
+
+    return current_time
 
 
+#Update Google Sheets
 
-# Add new employee
+def update_sales_worksheet(data):
+    """
+    Update sales worksheet, add new row with the list data provided
+    """
+    print("Updating sales worksheet...\n")
+    sales_worksheet = SHEET.worksheet("in_out_sheet")
+    sales_worksheet.append_row(data)
+    print("Sales worksheet updated successfully.\n")
+
+
+def transfer_of_data():
+    """
+    Takes data in and formats to list.
+    Updates csv file
+    """
+    employee_number = employee_input()
+    employee_details = itterate_through_employee_details(employee_number)
+    print("employee_details: ", employee_details)
+    clockin_time = clock_in_time()
+    print(clockin_time)
+    csv_result = employee_details + [clockin_time]
+    print("CSV: ", csv_result)
+    update_sales_worksheet(csv_result)
+
+#Create a New Employee
 
 class newEmployee:
     """
     This class allows the user to enter the necessary values to create a new instance of an employee
     and add it to the employeeList list. 
     """
-
     def __init__(self, employeeNumber, name, hourlyRate):
         self.employeeNumber = employeeNumber
         self.name = name
         self.hourlyRate = hourlyRate
- 
+
     def addingEmployeeDetails(self):
         employee = {
             "employeeNumber": int(f"{self.employeeNumber}"),
@@ -168,6 +159,10 @@ class newEmployee:
             "hourlyRate": f"{self.hourlyRate}"
             }
         employeeList.append(employee)
+
+last_employee_in_employeeList = employeeList[-1]["employeeNumber"]
+add_one_to_employee_number = int(last_employee_in_employeeList+1)
+print("***", int(add_one_to_employee_number))
 
 def add_new_employee():
     entering_name = input("Please enter employee name: ")
@@ -177,18 +172,10 @@ def add_new_employee():
     print("This is the new employee's name: ", newEmployeedAdded.name)
     print("This is the new employee hourly rate: ", newEmployeedAdded.hourlyRate)
     newEmployeedAdded.addingEmployeeDetails()
+    print("New employee add successfully: ", employeeList[-1])
+    main()
 
-
-#employee_number = input("Please enter you employee number: ")
-#validate_employee_number(employee_number)
-
-
-
-def clock_in():
-    list_of_employees_numbers()
-    print(list_of_numbers) 
-    #options_menu()
-    employee_clock_in()
-    print(list_of_numbers) 
-
-options_menu()
+def main():
+    options_menu()
+    
+main()
