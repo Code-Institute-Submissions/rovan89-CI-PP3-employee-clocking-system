@@ -1,6 +1,5 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from datetime import datetime
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -17,6 +16,8 @@ in_out_sheet = SHEET.worksheet('in_out_sheet')
 
 data = in_out_sheet.get_all_values()
 
+#print(data)
+
 employeeList = [ {
     "employeeNumber": 111,
     "name": "John Doe",
@@ -29,75 +30,55 @@ employeeList = [ {
     }
 ]
 
-def employee_input():
+print(employeeList)
+
+def options_menu():
+    """ 
+    Gives user an options menu
     """
-    Takes user input (Employee number)
+    print("Please choose one of the following options:\n 1. Clock in \n 2. Clock out\n 3. Add new employee to system")
+    options = input("Please enter the number that corresponds with the option you would like to choose: ")
+    if int(options) == 1:
+        clock_in()
+    elif int(options) == 2:
+        #clock_out()
+        pass
+    elif int(options) == 3:
+        add_new_employee()
+    else:
+        print("***You can only choose one of the given options, please enter a valid number***")
+        options_menu()
+
+class newEmployee:
     """
-    employee_number = input("Please enter you employee number: ")
-    return int(employee_number)
-
-#Find matching emplyee name to user entered employee number
-
-def itterates_employee_name():
+    This class allows the user to enter the necessary values to create a new instance of an employee
+    and add it to the employeeList list. 
     """
-    Itterates throught employees names.
-    """
-    all_employees_names = [name["name"] for name in employeeList if "name" in name]
-    print("-->",all_employees_names)
-    return all_employees_names
+    def __init__(self, employeeNumber, name, hourlyRate):
+        self.employeeNumber = employeeNumber
+        self.name = name
+        self.hourlyRate = hourlyRate
 
-def list_of_employees_numbers():
-    """
-    Itterates throught employees numbers.
-    """
-    all_employees_numbers = [num["employeeNumber"] for num in employeeList if "employeeNumber" in num]
-    print("-->", all_employees_numbers)
-    return all_employees_numbers
+    def addingEmployeeDetails(self):
+        employee = {
+            "employeeNumber": int(f"{self.employeeNumber}"),
+            "name": f"{self.name}",
+            "hourlyRate": f"{self.hourlyRate}"
+            }
+        employeeList.append(employee)
 
-def itterate_through_employee_details(employee_number):
-    for l, n in zip(list_of_employees_numbers(), itterates_employee_name()):
-        if employee_number is l:
-            employee_details = [l , n]
-            print(">>>", employee_details)
-            return employee_details
-        else:
-            continue
+last_employee_in_employeeList = employeeList[-1]["employeeNumber"]
+add_one_to_employee_number = int(last_employee_in_employeeList+1)
+print("***", int(add_one_to_employee_number))
 
-# Clock in system
-def clock_in_time():
-    time_now = datetime.now()
-    current_time = time_now.strftime("%H:%M")
+def add_new_employee():
+    entering_name = input("Please enter employee name: ")
+    entering_hourly_rate = input("Please enter employee hourly rate: ")
+    newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name, entering_hourly_rate)
+    print("This is the new employee number: " , newEmployeedAdded.employeeNumber)
+    print("This is the new employee's name: ", newEmployeedAdded.name)
+    print("This is the new employee hourly rate: ", newEmployeedAdded.hourlyRate)
+    newEmployeedAdded.addingEmployeeDetails()
 
-    return current_time
-
-
-#Update Google Sheets
-
-def update_sales_worksheet(data):
-    """
-    Update sales worksheet, add new row with the list data provided
-    """
-    print("Updating sales worksheet...\n")
-    sales_worksheet = SHEET.worksheet("in_out_sheet")
-    sales_worksheet.append_row(data)
-    print("Sales worksheet updated successfully.\n")
-
-
-def transfer_of_data():
-    """
-    Takes data in and formats to list.
-    Updates csv file
-    """
-    employee_number = employee_input()
-    employee_details = itterate_through_employee_details(employee_number)
-    print("employee_details: ", employee_details)
-    clockin_time = clock_in_time()
-    print(clockin_time)
-    csv_result = employee_details + [clockin_time]
-    print("CSV: ", csv_result)
-    update_sales_worksheet(csv_result)
-
-def main():
-    transfer_of_data()
-    
-main()
+options_menu()
+print(employeeList)
