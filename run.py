@@ -47,11 +47,15 @@ def options_menu():
         print("***You can only choose one of the given options, please enter a valid number***")
         options_menu()
 
-def clock_out():
-    print("Running Clockout")
-
-def adding_new_employee():
-    print("Running adding_new_employee()")
+class newEmployee:
+    """
+    This class allows the user to enter the necessary values to create a new instance of an employee
+    and add it to the employeeList list. 
+    """
+    def __init__(self, employeeNumber, name, hourlyRate):
+        self.employeeNumber = employeeNumber
+        self.name = name
+        self.hourlyRate = hourlyRate
 
 #Employee validation
 def employee_input():
