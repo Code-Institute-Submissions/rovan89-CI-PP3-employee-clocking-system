@@ -63,9 +63,6 @@ def itterate_through_employee_details(employee_number):
         else:
             continue
 
-
-
-
 # Clock in system
 def clock_in_time():
     time_now = datetime.now()
