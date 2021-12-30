@@ -1,4 +1,6 @@
 import gspread
+import pprint
+from pprint import pprint
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
@@ -16,6 +18,9 @@ SHEET = GSPREAD_CLIENT.open('employee_clocking_system')
 in_out_sheet = SHEET.worksheet('in_out_sheet')
 
 data = in_out_sheet.get_all_values()
+
+pprint(data)
+
 
 employeeList = [ {
     "employeeNumber": 111,
@@ -39,7 +44,7 @@ def options_menu():
     if int(options) == 1:
         transfer_of_data()
     elif int(options) == 2:
-        #clock_out()
+        clock_out()
         pass
     elif int(options) == 3:
         add_new_employee()
@@ -113,18 +118,38 @@ def clock_in_time():
 
     return current_time
 
+def find_last_employee_entry(employee_number):
+    count = 1
+    print("Entered Employee Number: ", employee_number)
+    new_data_set = data[1:]
+    print("This is the new data set: ", new_data_set)
+    for i in new_data_set:
+        print(">>>", type((int(i[0]))))
+        count +=1
+        print("This is count ",count)
+        if employee_number is int(i[0]):
+            print(employee_number, "is >>> to ", i)
+
+            return count
+        else:
+            print("Faild")
+    
+#Clock Out
+def clock_out():
+    col_count = find_last_employee_entry(employee_input())
+    print("Col count: ", col_count)
+    clock_out_time = clock_in_time()
+    in_out_sheet.update(f"D{col_count}", clock_out_time)
+    options_menu()
+
 
 #Update Google Sheets
 
-def update_sales_worksheet(data):
-    """
-    Update sales worksheet, add new row with the list data provided
-    """
-    print("Updating sales worksheet...\n")
-    sales_worksheet = SHEET.worksheet("in_out_sheet")
-    sales_worksheet.append_row(data)
-    print("Sales worksheet updated successfully.\n")
-
+def update_in_out_sheet(timestamp_in):
+    print("Updating in_out_sheet clock-in time...")
+    clocking_sheet = SHEET.worksheet("in_out_sheet")
+    clocking_sheet.append_row(timestamp_in)
+    print("Clock in time updated successfully")
 
 def transfer_of_data():
     """
@@ -138,7 +163,7 @@ def transfer_of_data():
     print(clockin_time)
     csv_result = employee_details + [clockin_time]
     print("CSV: ", csv_result)
-    update_sales_worksheet(csv_result)
+    update_in_out_sheet(csv_result)
 
 #Create a New Employee
 
