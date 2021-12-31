@@ -15,6 +15,7 @@ The user first decides which option they would like to do, then a google sheet i
         - Option three allows the user to add new employees to the list of current employees
         - Option four allows the user to quit running the program.
 
-
-2. 
+#### Clock-in 
+    - The clock-in option allows an existing employee to enter their employee number.
+    - This then creates a new row in the Google Sheet (employee_clocking_system) and inputs the employees number, name and time of clock in.
 
