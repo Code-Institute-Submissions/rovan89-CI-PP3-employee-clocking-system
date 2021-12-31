@@ -28,3 +28,6 @@ The user first decides which option they would like to do, then a google sheet i
         - Next the user is prompted to add the hourly rate of the new employee.
         - Finally the new user is assigned an employee number and a new employee has been successfully added to the list
 
+#### Exit
+    - The Exit option allows the user to end the program.
+
