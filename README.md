@@ -31,3 +31,7 @@ The user first decides which option they would like to do, then a google sheet i
 #### Exit
     - The Exit option allows the user to end the program.
 
+### User Input Validation 
+    - The input validation checks has the user entered the correct amount of digits.
+    - If the incorrect amount of digits is entered the user an error message will be displayed in the terminal
+
