@@ -20,7 +20,7 @@ in_out_sheet = SHEET.worksheet('in_out_sheet')
 
 data = in_out_sheet.get_all_values()
 
-employeeList = [ {
+employeeList = [{
     "employeeNumber": 111,
     "name": "John Doe",
     "hourlyRate": "10.00"
@@ -31,20 +31,32 @@ employeeList = [ {
     "hourlyRate": "11.00"
     }
 ]
-#User Options Menu
+
+# User Options Menu
+
 
 def options_menu():
-    """ 
+    """
     Gives user an options menu
     """
-    print("\n       ************************* \n                WELCOME      \n       *************************")
-    print("Please choose one of the following options:\n     1. Clock in \n     2. Clock out\n     3. Add new employee to system\n     4. Exit program\n" )
-    options = input("Please enter the number that corresponds with the option you would like to choose: ")
+    print("\n       *************************")
+    print("                WELCOME      ")
+    print("       *************************")
+    print("Please choose one of the following options:\n")
+    print("1. Clock in")
+    print("2. Clock out")
+    print("3. Add new employee to system")
+    print("4. Exit program\n")
+    options = input("Please enter the number of your chosen option: ")
     if int(options) == 1:
-        print("\n************************************* \n            CLOCKING IN      \n*************************************\n")
+        print("\n*************************************")
+        print("           CLOCKING IN      ")
+        print("*************************************\n")
         transfer_of_data()
     elif int(options) == 2:
-        print("\n************************************* \n            CLOCKING OUT     \n*************************************\n")
+        print("\n*************************************")
+        print("            CLOCKING OUT     ")
+        print("*************************************\n")
         clock_out()
     elif int(options) == 3:
         print("\n************************************* \n         ADD NEW EMPLOYEE    \n*************************************\n")
