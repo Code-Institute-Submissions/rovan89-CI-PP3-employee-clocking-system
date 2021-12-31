@@ -1,5 +1,6 @@
 import gspread
 import pprint
+import sys
 from pprint import pprint
 from google.oauth2.service_account import Credentials
 from datetime import datetime
@@ -39,15 +40,16 @@ def options_menu():
     """ 
     Gives user an options menu
     """
-    print("Please choose one of the following options:\n 1. Clock in \n 2. Clock out\n 3. Add new employee to system")
+    print("Please choose one of the following options:\n 1. Clock in \n 2. Clock out\n 3. Add new employee to system\n 4. Exit program" )
     options = input("Please enter the number that corresponds with the option you would like to choose: ")
     if int(options) == 1:
         transfer_of_data()
     elif int(options) == 2:
         clock_out()
-        pass
     elif int(options) == 3:
         add_new_employee()
+    elif int(options) == 4:
+        exit_program()
     else:
         print("***You can only choose one of the given options, please enter a valid number***")
         options_menu()
@@ -199,6 +201,9 @@ def add_new_employee():
     newEmployeedAdded.addingEmployeeDetails()
     print("New employee add successfully: ", employeeList[-1])
     main()
+
+def exit_program():
+    sys.exit()
 
 def main():
     options_menu()
