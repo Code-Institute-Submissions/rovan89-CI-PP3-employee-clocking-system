@@ -50,7 +50,7 @@ The user first decides which option they would like to do, then a google sheet i
 
 ![Adding new employee](assets/images/readme_images/adding_new_employee.PNG)
 
-### Exit
+### Exit (Option Four)
     - The Exit option allows the user to end the program.
 
 
@@ -81,8 +81,14 @@ The user first decides which option they would like to do, then a google sheet i
 | Clock out | Type in a correct employee number | Find where the employee signed in Update Google Sheets clock out cell with the current time | As expected |
 | Exit | Choose the exit option | This will terminate the program | As expected |
 
+## Validator Testing 
+### PEP8 Validation
+- The PEP8 Valitator has resulted in no errors or warnings
+
 ## Credits
 ### Code
 - To implement time into the program I used https://www.programiz.com/python-programming/datetime/current-time 
 - To find additonal features working with Google Sheets I used https://www.youtube.com/watch?v=yPQ2Gk33b1U&ab_channel=PrettyPrinted 
+
+
 
