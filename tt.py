@@ -1,3 +1,8 @@
+"""
+
+"""
+
+
 import gspread
 import pprint
 import sys
@@ -165,10 +170,10 @@ def clock_out():
 # Update Google Sheets
 
 
-def update_in_out_sheet(timestamp_in):
+def update_in_out_sheet(csv_input):
     print("\nUpdating in_out_sheet clock-in time...")
     clocking_sheet = SHEET.worksheet("in_out_sheet")
-    clocking_sheet.append_row(timestamp_in)
+    clocking_sheet.append_row(csv_input)
     print("\nClock in time updated successfully \n ")
 
 
@@ -182,6 +187,7 @@ def transfer_of_data():
     clockin_time = clock_in_time()
     print("\nThe current time is: ", clockin_time)
     csv_result = employee_details + [clockin_time]
+    print(">>>",csv_result)
     update_in_out_sheet(csv_result)
 
 # Create a New Employee

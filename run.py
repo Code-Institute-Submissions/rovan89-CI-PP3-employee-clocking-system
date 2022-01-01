@@ -64,7 +64,7 @@ employeeList = [{
     "employeeNumber": 119,
     "name": "Kelly Preston",
     "hourlyRate": "15.00"
-    },
+    }
 ]
 
 # User Options Menu
@@ -211,6 +211,7 @@ def clock_out():
     """
     col_count = find_last_employee_entry(employee_input())
     clock_out_time = clock_in_time()
+    print("\nYou clocked out at: ", clock_out_time)
     in_out_sheet.update(f"D{col_count}", clock_out_time)
     options_menu()
 
@@ -218,13 +219,13 @@ def clock_out():
 # Update Google Sheets
 
 
-def update_in_out_sheet(csv_input):
+def update_in_out_sheet(timestamp_in):
     """
     Updates Google Sheets with given values.
     """
     print("\nUpdating in_out_sheet clock-in time...")
     clocking_sheet = SHEET.worksheet("in_out_sheet")
-    clocking_sheet.append_row(csv_input)
+    clocking_sheet.append_row(timestamp_in)
     print("\nClock in time updated successfully \n ")
 
 
@@ -236,7 +237,7 @@ def transfer_of_data():
     employee_number = employee_input()
     employee_details = itterate_through_employee_details(employee_number)
     clockin_time = clock_in_time()
-    print("\nThe current time is: ", clockin_time)
+    print("\nYou clocked in at: ", clockin_time)
     csv_result = employee_details + [clockin_time]
     update_in_out_sheet(csv_result)
 
@@ -249,16 +250,14 @@ class newEmployee:
     create a new instance of an employee
     and add it to the employeeList list.
     """
-    def __init__(self, employeeNumber, name, hourlyRate):
+    def __init__(self, employeeNumber, name):
         self.employeeNumber = employeeNumber
         self.name = name
-        self.hourlyRate = hourlyRate
 
     def addingEmployeeDetails(self):
         employee = {
             "employeeNumber": int(f"{self.employeeNumber}"),
             "name": f"{self.name}",
-            "hourlyRate": f"{self.hourlyRate}"
             }
         employeeList.append(employee)
 
