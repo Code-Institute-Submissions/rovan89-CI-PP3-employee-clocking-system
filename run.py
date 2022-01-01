@@ -80,7 +80,7 @@ def options_menu():
     print("2. Clock out")
     print("3. Add new employee to system")
     print("4. Exit program\n")
-    options = input("Please enter the number of your chosen option: ")
+    options = input("Please enter the number of your chosen option: \n")
     if int(options) == 1:
         print("\n*************************************")
         print("           CLOCKING IN      ")
@@ -113,7 +113,7 @@ def employee_input():
     """
     while True:
 
-        employee_number = input("Please enter you employee number: ")
+        employee_number = input("Please enter you employee number: \n")
 
         if validate_employee_number_count(employee_number):
             print("Employee number is valid!")
@@ -267,7 +267,7 @@ def add_new_employee():
     This function adds a new employee.
     Once add the function opens the options menu again.
     """
-    entering_name = input("Please enter employee name: ")
+    entering_name = input("Please enter employee name: \n")
     newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name)
     newEmployeedAdded.addingEmployeeDetails()
     print("\nNew employee added successfully: ", employeeList[-1])
