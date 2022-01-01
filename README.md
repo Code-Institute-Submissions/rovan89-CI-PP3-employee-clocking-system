@@ -1,5 +1,6 @@
 # Employee Clock in System
 (Developer: Devan Hayes)
+[Employee Clocking System Live](https://employee-clocking-system.herokuapp.com/)
 
 ![Deployed Program](assets/images/readme_images/deployed_program.PNG)
 ![Google Sheets Image](assets/images/readme_images/employee_clocking_system.PNG)
