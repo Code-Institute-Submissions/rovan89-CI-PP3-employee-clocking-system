@@ -7,8 +7,8 @@ Employee Clock In System is a program that allows employees of a business to clo
 ## User Experience
 The user first decides which option they would like to do, then a google sheet is updated with the data. 
 
+## Features
 ### Options Menu
-#### Options
     - The options menu has four options to choose from.
         - Option one allows the user to clock in by entering their employee number.
         - Option two allows the user to clock out.
@@ -17,6 +17,7 @@ The user first decides which option they would like to do, then a google sheet i
 
 #### Clock-in (Option One)
     - The clock-in option allows an existing employee to enter their employee number.
+    - The nubmer runs through a validation function to check the correct lenght of the number entered.
     - This then creates a new row in the Google Sheet (employee_clocking_system) and inputs the employees number, name and time of clock in.
 
 #### Clock-out (Option Two)
@@ -31,8 +32,7 @@ The user first decides which option they would like to do, then a google sheet i
 #### Exit
     - The Exit option allows the user to end the program.
 
-## Features
-
+### 
 
 ### User Input Validation 
     - The input validation checks has the user entered the correct amount of digits.
@@ -41,7 +41,7 @@ The user first decides which option they would like to do, then a google sheet i
 ### Languages
 - Python 3
 
-### Frameworks & Tools
+### Frameworks and Tools
 - gitHub
 - Gitpod
 - Git

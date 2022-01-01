@@ -29,7 +29,42 @@ employeeList = [{
     "employeeNumber": 112,
     "name": "Jane Doe",
     "hourlyRate": "11.00"
-    }
+    },
+    {
+    "employeeNumber": 113,
+    "name": "Jax Teller",
+    "hourlyRate": "17.50"
+    },
+    {
+    "employeeNumber": 114,
+    "name": "D'Angelo Barksdale",
+    "hourlyRate": "11.00"
+    },
+    {
+    "employeeNumber": 115,
+    "name": "Tony Stark",
+    "hourlyRate": "13.00"
+    },
+    {
+    "employeeNumber": 116,
+    "name": "Matilda Wormwood",
+    "hourlyRate": "18.00"
+    },
+    {
+    "employeeNumber": 117,
+    "name": "Danny DeVito",
+    "hourlyRate": "9.00"
+    },
+    {
+    "employeeNumber": 118,
+    "name": "Arnold Schwarzenegger",
+    "hourlyRate": "11.50"
+    },
+    {
+    "employeeNumber": 119,
+    "name": "Kelly Preston",
+    "hourlyRate": "15.00"
+    },
 ]
 
 # User Options Menu
