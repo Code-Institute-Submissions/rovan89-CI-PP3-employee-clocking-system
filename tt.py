@@ -70,8 +70,9 @@ def options_menu():
         print("Closing program...\n")
         exit_program()
     else:
-        print("***You can only choose one of the given options, please enter a valid number***")
+        print("***Please enter a valid number***")
         options_menu()
+
 
 def employee_input():
     """
@@ -88,12 +89,13 @@ def employee_input():
 
     return int(employee_number)
 
+
 def validate_employee_number_count(values):
     """
     Rasises ValueError if value is not an int.
     Checks if there is exactly 3 values.
     """
-    try: 
+    try:
         if len(values) != 3:
             raise ValueError(
                 f"3 values are required, you provided {len(values)}"
@@ -104,47 +106,55 @@ def validate_employee_number_count(values):
 
     return True
 
-#Find matching emplyee name to user entered employee number
+# Find matching emplyee name to user entered employee number
+
 
 def itterates_employee_name():
     """
     Itterates throught employees names.
     """
-    all_employees_names = [name["name"] for name in employeeList if "name" in name]
+    all_employees_names = [name["name"] for name in employeeList]
     return all_employees_names
+
 
 def list_of_employees_numbers():
     """
     Itterates throught employees numbers.
     """
-    all_employees_numbers = [num["employeeNumber"] for num in employeeList if "employeeNumber" in num]
+    all_employees_numbers = [num["employeeNumber"] for num in employeeList]
     return all_employees_numbers
+
 
 def itterate_through_employee_details(employee_number):
     for l, n in zip(list_of_employees_numbers(), itterates_employee_name()):
         if employee_number is l:
-            employee_details = [l , n]
+            employee_details = [l, n]
             return employee_details
         else:
             continue
 
 # Clock in system
+
+
 def clock_in_time():
     time_now = datetime.now()
     current_time = time_now.strftime("%H:%M")
 
     return current_time
 
+
 def find_last_employee_entry(employee_number):
     count = 1
     new_data_set = data[1:]
     for i in new_data_set:
-        count +=1
+        count += 1
         if employee_number is int(i[0]):
 
             return count
-    
-#Clock Out
+
+# Clock Out
+
+
 def clock_out():
     col_count = find_last_employee_entry(employee_input())
     clock_out_time = clock_in_time()
@@ -152,13 +162,15 @@ def clock_out():
     options_menu()
 
 
-#Update Google Sheets
+# Update Google Sheets
+
 
 def update_in_out_sheet(timestamp_in):
     print("\nUpdating in_out_sheet clock-in time...")
     clocking_sheet = SHEET.worksheet("in_out_sheet")
     clocking_sheet.append_row(timestamp_in)
     print("\nClock in time updated successfully \n ")
+
 
 def transfer_of_data():
     """
@@ -172,12 +184,14 @@ def transfer_of_data():
     csv_result = employee_details + [clockin_time]
     update_in_out_sheet(csv_result)
 
-#Create a New Employee
+# Create a New Employee
+
 
 class newEmployee:
     """
-    This class allows the user to enter the necessary values to create a new instance of an employee
-    and add it to the employeeList list. 
+    This class allows the user to enter the necessary values to
+    create a new instance of an employee
+    and add it to the employeeList list.
     """
     def __init__(self, employeeNumber, name, hourlyRate):
         self.employeeNumber = employeeNumber
@@ -198,16 +212,17 @@ add_one_to_employee_number = int(last_employee_in_employeeList+1)
 
 def add_new_employee():
     entering_name = input("Please enter employee name: ")
-    entering_hourly_rate = input("Please enter employee hourly rate: ")
-    newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name, entering_hourly_rate)
+    newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name)
     newEmployeedAdded.addingEmployeeDetails()
     print("\nNew employee add successfully: ", employeeList[-1])
     main()
 
+
 def exit_program():
     sys.exit()
 
+
 def main():
     options_menu()
-    
+
 main()

@@ -126,6 +126,12 @@ def list_of_employees_numbers():
 
 
 def itterate_through_employee_details(employee_number):
+    """
+    Iterates through both lists: list_of_employees_numbers and
+    itterates_employee_name.
+    This alows the program to find to corresponding row in
+    Google Sheets.
+    """
     for l, n in zip(list_of_employees_numbers(), itterates_employee_name()):
         if employee_number is l:
             employee_details = [l, n]
@@ -137,6 +143,9 @@ def itterate_through_employee_details(employee_number):
 
 
 def clock_in_time():
+    """
+    This function returns the current time.
+    """
     time_now = datetime.now()
     current_time = time_now.strftime("%H:%M")
 
@@ -144,6 +153,11 @@ def clock_in_time():
 
 
 def find_last_employee_entry(employee_number):
+    """
+    This function finds the row in Google Sheets of
+    number of the employee number that
+    was entered by the user
+    """
     count = 1
     new_data_set = data[1:]
     for i in new_data_set:
@@ -156,6 +170,10 @@ def find_last_employee_entry(employee_number):
 
 
 def clock_out():
+    """
+    This function marks the current time and
+    and updates the currect loction on google sheets.
+    """
     col_count = find_last_employee_entry(employee_input())
     clock_out_time = clock_in_time()
     in_out_sheet.update(f"D{col_count}", clock_out_time)
@@ -165,10 +183,13 @@ def clock_out():
 # Update Google Sheets
 
 
-def update_in_out_sheet(timestamp_in):
+def update_in_out_sheet(csv_input):
+    """
+    Updates Google Sheets with given values.
+    """
     print("\nUpdating in_out_sheet clock-in time...")
     clocking_sheet = SHEET.worksheet("in_out_sheet")
-    clocking_sheet.append_row(timestamp_in)
+    clocking_sheet.append_row(csv_input)
     print("\nClock in time updated successfully \n ")
 
 
@@ -211,6 +232,10 @@ add_one_to_employee_number = int(last_employee_in_employeeList+1)
 
 
 def add_new_employee():
+    """
+    This function adds a new employee.
+    Once add the function opens the options menu again.
+    """
     entering_name = input("Please enter employee name: ")
     newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name)
     newEmployeedAdded.addingEmployeeDetails()
@@ -219,10 +244,17 @@ def add_new_employee():
 
 
 def exit_program():
+    """
+    This function ends the running of the program.
+    """
     sys.exit()
 
 
 def main():
+    """
+    The main function fires the options_menu function.
+    This is saved here for readability.
+    """
     options_menu()
 
 main()
