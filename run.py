@@ -1,7 +1,5 @@
 import gspread
-import pprint
 import sys
-from pprint import pprint
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
