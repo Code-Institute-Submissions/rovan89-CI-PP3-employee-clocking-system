@@ -3,10 +3,30 @@
 
 ![Google Sheets Image](assets/images/readme_images/employee_clocking_system.PNG)
 
+## Tables of Contents
+1. [Project Goals](#project_goals)
+    1. [User Experience](#user_experience)
+    2. [Target Audience](#target_audience)
+    3. [User Stories](#user_stories)
+    4. [Business Owner Stories](#business_owner_stories)
+2. [Features](#fearutes)
+    1. [Options Menu](#options_menu)
+    2. [Clock-in](#clock_in)
+    3. [Clock-out](#clock_out)
+    4. [Exit](#exit)
+    5. [User Input Validation](#user_input_validation)
+3. [Languages](#languages)
+4. [Frameworks and Tools](#frameworks_and_tools)
+5. [Bugs](#bugs)
+6. [Testing](#testing)
+7. [Validator Testing](#validator_testing)
+8. []
+9. [Credits](#credits)
+
 ## Project Goals
 Employee Clock In System is a program that allows employees of a business to clock in and out. This facilitates the owners with the necessary data they need to track the employees' hours.
 
-## User Experience
+### User Experience
 The user first decides which option they would like to do, then a google sheet is updated with the data. 
 
 ### Target Audience
@@ -51,12 +71,14 @@ The user first decides which option they would like to do, then a google sheet i
 ![Adding new employee](assets/images/readme_images/adding_new_employee.PNG)
 
 ### Exit (Option Four)
-    - The Exit option allows the user to end the program.
+- The Exit option allows the user to end the program.
 
 
 ### User Input Validation 
-    - The input validation checks has the user entered the correct amount of digits.
-    - If the incorrect amount of digits is entered the user an error message will be displayed in the terminal
+- The input validation checks has the user entered the correct amount of digits.
+- If the incorrect amount of digits is entered the user an error message will be displayed in the terminal
+
+![User input validation](assets/images/readme_images/user_input_validation_count.PNG)
 
 ## Languages
 - Python 3
@@ -84,6 +106,8 @@ The user first decides which option they would like to do, then a google sheet i
 ## Validator Testing 
 ### PEP8 Validation
 - The PEP8 Valitator has resulted in no errors or warnings
+
+![PEP8 Validator](assets/images/readme_images/pep_validation.PNG)
 
 ## Credits
 ### Code
