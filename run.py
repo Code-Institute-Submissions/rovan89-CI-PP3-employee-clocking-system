@@ -116,7 +116,7 @@ def employee_input():
     while True:
 
         employee_number = input("Please enter you employee number: ")
-        validate_employee_number_count(employee_number)
+        
 
         if validate_employee_number_count(employee_number):
             print("Employee number is valid!")
@@ -136,7 +136,7 @@ def validate_employee_number_count(values):
                 f"3 values are required, you provided {len(values)}"
             )
     except ValueError as e:
-        print(f"Invalid entry: {e}, please try again\n ")
+        print(f"\nInvalid entry: {e}, please try again\n ")
         return False
 
     return True
@@ -273,7 +273,7 @@ def add_new_employee():
     entering_name = input("Please enter employee name: ")
     newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name)
     newEmployeedAdded.addingEmployeeDetails()
-    print("\nNew employee add successfully: ", employeeList[-1])
+    print("\nNew employee added successfully: ", employeeList[-1])
     main()
 
 
