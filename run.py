@@ -116,7 +116,6 @@ def employee_input():
     while True:
 
         employee_number = input("Please enter you employee number: ")
-        
 
         if validate_employee_number_count(employee_number):
             print("Employee number is valid!")

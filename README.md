@@ -42,7 +42,6 @@ The user first decides which option they would like to do, then a google sheet i
 #### Exit
     - The Exit option allows the user to end the program.
 
-### 
 
 ### User Input Validation 
     - The input validation checks has the user entered the correct amount of digits.
@@ -55,4 +54,10 @@ The user first decides which option they would like to do, then a google sheet i
 - gitHub
 - Gitpod
 - Git
+
+### Testing
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+|Options Menu| Choose all options one by one| That the option selected by the user would execute.| As expected |
 
