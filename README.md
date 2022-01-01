@@ -20,7 +20,7 @@
 5. [Bugs](#bugs)
 6. [Testing](#testing)
 7. [Validator Testing](#validator_testing)
-8. []
+8. [Deployment](#deployment)
 9. [Credits](#credits)
 
 ## Project Goals
@@ -108,6 +108,22 @@ The user first decides which option they would like to do, then a google sheet i
 - The PEP8 Valitator has resulted in no errors or warnings
 
 ![PEP8 Validator](assets/images/readme_images/pep_validation.PNG)
+
+## Deployment
+Heroku was used for the deployment of this program.
+1. In the workspace terminal command line: "pip3 freeze > requirements.txt"
+2. Create account on Heroku
+3. On the dashboard page, select "create new app"
+4. Click create app
+5. Go to the "settings" tab, find "Config Vars" enter "Creds" into the key field and copy the contents for the creds.json file into the value field
+6. In setting find add buid packs to app
+    1. python
+    2. node.js
+6. Scroll up to the navigation menu and find "deploy", select GitHub as deployment method
+7. In the Deployment Method section select Gitub or connect to GitHub
+8. In the "Connect to GitHub, searh the desired repository
+9. Enable automatic deploys and then deploy branch
+10. Once deployed click on "View" to open aplication
 
 ## Credits
 ### Code
