@@ -59,10 +59,14 @@ def options_menu():
         print("*************************************\n")
         clock_out()
     elif int(options) == 3:
-        print("\n************************************* \n         ADD NEW EMPLOYEE    \n*************************************\n")
+        print("\n*************************************")
+        print("         ADD NEW EMPLOYEE    ")
+        print("*************************************\n")
         add_new_employee()
     elif int(options) == 4:
-        print("\n************************************* \n          EXITING PROGRAM    \n*************************************\n")
+        print("\n************************************")
+        print("         EXITING PROGRAM    ")
+        print("************************************\n")
         print("Closing program...\n")
         exit_program()
     else:

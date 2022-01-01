@@ -1,4 +1,7 @@
 import gspread
+import pprint
+import sys
+from pprint import pprint
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
@@ -17,7 +20,7 @@ in_out_sheet = SHEET.worksheet('in_out_sheet')
 
 data = in_out_sheet.get_all_values()
 
-employeeList = [ {
+employeeList = [{
     "employeeNumber": 111,
     "name": "John Doe",
     "hourlyRate": "10.00"
@@ -28,21 +31,44 @@ employeeList = [ {
     "hourlyRate": "11.00"
     }
 ]
-#User Options Menu
+
+# User Options Menu
+
 
 def options_menu():
-    """ 
+    """
     Gives user an options menu
     """
-    print("Please choose one of the following options:\n 1. Clock in \n 2. Clock out\n 3. Add new employee to system")
-    options = input("Please enter the number that corresponds with the option you would like to choose: ")
+    print("\n       *************************")
+    print("                WELCOME      ")
+    print("       *************************")
+    print("Please choose one of the following options:\n")
+    print("1. Clock in")
+    print("2. Clock out")
+    print("3. Add new employee to system")
+    print("4. Exit program\n")
+    options = input("Please enter the number of your chosen option: ")
     if int(options) == 1:
+        print("\n*************************************")
+        print("           CLOCKING IN      ")
+        print("*************************************\n")
         transfer_of_data()
     elif int(options) == 2:
-        #clock_out()
-        pass
+        print("\n*************************************")
+        print("            CLOCKING OUT     ")
+        print("*************************************\n")
+        clock_out()
     elif int(options) == 3:
+        print("\n*************************************")
+        print("         ADD NEW EMPLOYEE    ")
+        print("*************************************\n")
         add_new_employee()
+    elif int(options) == 4:
+        print("\n************************************")
+        print("         EXITING PROGRAM    ")
+        print("************************************\n")
+        print("Closing program...\n")
+        exit_program()
     else:
         print("***You can only choose one of the given options, please enter a valid number***")
         options_menu()
@@ -67,7 +93,6 @@ def validate_employee_number_count(values):
     Rasises ValueError if value is not an int.
     Checks if there is exactly 3 values.
     """
-    print(values)
     try: 
         if len(values) != 3:
             raise ValueError(
@@ -86,7 +111,6 @@ def itterates_employee_name():
     Itterates throught employees names.
     """
     all_employees_names = [name["name"] for name in employeeList if "name" in name]
-    print("-->",all_employees_names)
     return all_employees_names
 
 def list_of_employees_numbers():
@@ -94,14 +118,12 @@ def list_of_employees_numbers():
     Itterates throught employees numbers.
     """
     all_employees_numbers = [num["employeeNumber"] for num in employeeList if "employeeNumber" in num]
-    print("-->", all_employees_numbers)
     return all_employees_numbers
 
 def itterate_through_employee_details(employee_number):
     for l, n in zip(list_of_employees_numbers(), itterates_employee_name()):
         if employee_number is l:
             employee_details = [l , n]
-            print(">>>", employee_details)
             return employee_details
         else:
             continue
@@ -113,18 +135,30 @@ def clock_in_time():
 
     return current_time
 
+def find_last_employee_entry(employee_number):
+    count = 1
+    new_data_set = data[1:]
+    for i in new_data_set:
+        count +=1
+        if employee_number is int(i[0]):
+
+            return count
+    
+#Clock Out
+def clock_out():
+    col_count = find_last_employee_entry(employee_input())
+    clock_out_time = clock_in_time()
+    in_out_sheet.update(f"D{col_count}", clock_out_time)
+    options_menu()
+
 
 #Update Google Sheets
 
-def update_sales_worksheet(data):
-    """
-    Update sales worksheet, add new row with the list data provided
-    """
-    print("Updating sales worksheet...\n")
-    sales_worksheet = SHEET.worksheet("in_out_sheet")
-    sales_worksheet.append_row(data)
-    print("Sales worksheet updated successfully.\n")
-
+def update_in_out_sheet(timestamp_in):
+    print("\nUpdating in_out_sheet clock-in time...")
+    clocking_sheet = SHEET.worksheet("in_out_sheet")
+    clocking_sheet.append_row(timestamp_in)
+    print("\nClock in time updated successfully \n ")
 
 def transfer_of_data():
     """
@@ -133,12 +167,10 @@ def transfer_of_data():
     """
     employee_number = employee_input()
     employee_details = itterate_through_employee_details(employee_number)
-    print("employee_details: ", employee_details)
     clockin_time = clock_in_time()
-    print(clockin_time)
+    print("\nThe current time is: ", clockin_time)
     csv_result = employee_details + [clockin_time]
-    print("CSV: ", csv_result)
-    update_sales_worksheet(csv_result)
+    update_in_out_sheet(csv_result)
 
 #Create a New Employee
 
@@ -162,18 +194,18 @@ class newEmployee:
 
 last_employee_in_employeeList = employeeList[-1]["employeeNumber"]
 add_one_to_employee_number = int(last_employee_in_employeeList+1)
-print("***", int(add_one_to_employee_number))
+
 
 def add_new_employee():
     entering_name = input("Please enter employee name: ")
     entering_hourly_rate = input("Please enter employee hourly rate: ")
     newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name, entering_hourly_rate)
-    print("This is the new employee number: " , newEmployeedAdded.employeeNumber)
-    print("This is the new employee's name: ", newEmployeedAdded.name)
-    print("This is the new employee hourly rate: ", newEmployeedAdded.hourlyRate)
     newEmployeedAdded.addingEmployeeDetails()
-    print("New employee add successfully: ", employeeList[-1])
+    print("\nNew employee add successfully: ", employeeList[-1])
     main()
+
+def exit_program():
+    sys.exit()
 
 def main():
     options_menu()
