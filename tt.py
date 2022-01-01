@@ -186,7 +186,7 @@ def transfer_of_data():
     employee_details = itterate_through_employee_details(employee_number)
     clockin_time = clock_in_time()
     print("\nThe current time is: ", clockin_time)
-    csv_result = employee_details + [clockin_time]
+    csv_result = employee_details + clockin_time
     print(">>>",csv_result)
     update_in_out_sheet(csv_result)
 

@@ -55,9 +55,18 @@ The user first decides which option they would like to do, then a google sheet i
 - Gitpod
 - Git
 
+### Bugs
+| **Feature / Function** | **Expected Result** | **Actual Result** | **Action** |
+|-------------|------------|---------------------|-------------------|
+| find_last_employee_entry()| It would count employee numbers | ValueError: invalid literal for int() | The first cell was a heading. This was fixed by using indexing to begin at the second cell [1:]|
+|transfer_of_data()| To revieve input from the user and update google sheets | TypeError: can only concatenate list (not "str") to list | To concatenate the two variables I needed to format the string type into a list. Example: csv_result = employee_details + [clockin_time]
+
 ### Testing
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-|Options Menu| Choose all options one by one| That the option selected by the user would execute.| As expected |
+|Options Menu| Run the program, choose all menu options one by one| That the option selected by the user would execute.| As expected |
+| Clock in | Type in a correct employee number | Update Google Sheets with  employee number, name and time of clock in | As expected |
+| Clock out | Type in a correct employee number | Find where the employee signed in Update Google Sheets clock out cell with the current time | As expected |
+| Exit | Choose the exit option | This will terminate the program | As expected |
 
