@@ -151,12 +151,15 @@ def userFeedback():
     """
 
     feedback = input("Please leave us your feedback /n")
+    update_user_feedback_sheet(feedback):
+
+def update_user_feedback_sheet(user_feedback):
+    """
+    This function updates the user_feedback_sheet in google sheets
+    """
+    user_feedback_sheet.append_row(user_feedback)
 
 
-def update_user_feedback_sheet():
-    """
-    THis function updates the user_feedback_sheet in google sheets
-    """
 # Find matching emplyee name to user entered employee number
 
 
