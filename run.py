@@ -79,7 +79,8 @@ def options_menu():
     print("1. Clock in")
     print("2. Clock out")
     print("3. Add new employee to system")
-    print("4. Exit program\n")
+    print("4. Give Feedback")
+    print("5. Exit program\n")
     options = input("Please enter the number of your chosen option: \n")
     if int(options) == 1:
         print("\n*************************************")
@@ -97,6 +98,11 @@ def options_menu():
         print("*************************************\n")
         add_new_employee()
     elif int(options) == 4:
+        print("\n*************************************")
+        print("         Give Feedback    ")
+        print("*************************************\n")
+        userFeedback()
+    elif int(options) == 5:
         print("\n************************************")
         print("         EXITING PROGRAM    ")
         print("************************************\n")
@@ -237,6 +243,7 @@ def transfer_of_data():
     print("\nYou clocked in at: ", clockin_time)
     csv_result = employee_details + [clockin_time]
     update_in_out_sheet(csv_result)
+    options_menu()
 
 # Create a New Employee
 
