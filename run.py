@@ -15,6 +15,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('employee_clocking_system')
 
 in_out_sheet = SHEET.worksheet('in_out_sheet')
+user_feedback = SHEET.worksheet('user_feedback')
 
 data = in_out_sheet.get_all_values()
 
@@ -144,6 +145,18 @@ def validate_employee_number_count(values):
 
     return True
 
+def userFeedback():
+    """
+    This function takes user feedback
+    """
+
+    feedback = input("Please leave us your feedback /n")
+
+
+def update_user_feedback_sheet():
+    """
+    THis function updates the user_feedback_sheet in google sheets
+    """
 # Find matching emplyee name to user entered employee number
 
 
