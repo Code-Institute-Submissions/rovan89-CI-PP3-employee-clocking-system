@@ -1,5 +1,6 @@
 import gspread
 import sys
+import time
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
@@ -145,14 +146,34 @@ def validate_employee_number_count(values):
 
     return True
 
+def checks_for_empty_input(values):
+    """
+    Rasises ValueError if input in empty.
+    """
+    try:
+        if values == "":
+            raise ValueError(
+                f"An empty input is not valid"
+            )
+    except ValueError as e:
+        print(f"\nInvalid entry: {e}, please try again\n ")
+        return False
+
+    return True
+
 def userFeedback():
     """
     This function takes user feedback
     """
+    while True:
 
-    feedback = input("Please leave us your feedback: \n")
-    update_user_feedback_sheet(feedback)
-    options_menu()
+        feedback = input("Please leave us your feedback: ")
+
+        if checks_for_empty_input(feedback):
+            print("\nInput is valid! \n")
+            update_user_feedback_sheet(feedback)
+            options_menu()
+    
 
 def update_user_feedback_sheet(user_fb):
     """
