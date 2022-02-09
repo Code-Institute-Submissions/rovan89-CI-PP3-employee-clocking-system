@@ -105,7 +105,9 @@ The user first decides which option they would like to do, then a google sheet i
 |Options Menu| Run the program, choose all menu options one by one| That the option selected by the user would execute.| As expected |
 | Clock in | Type in a correct employee number | Update Google Sheets with  employee number, name and time of clock in | As expected |
 | Clock out | Type in a correct employee number | Find where the employee signed in Update Google Sheets clock out cell with the current time | As expected |
+| Give Feedback | Type in feedback | Feedback is recived, user_feedback worksheet in google sheets is updated | As expected|
 | Exit | Choose the exit option | This will terminate the program | As expected |
+| User input validation | Takes user input to validate | Checks to see if the user has entered a valid input | As expected |
 
 ## Validator Testing 
 ### PEP8 Validation
