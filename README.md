@@ -133,6 +133,7 @@ Heroku was used for the deployment of this program.
 ### Code
 - To implement time into the program I used https://www.programiz.com/python-programming/datetime/current-time 
 - To find additonal features working with Google Sheets I used https://www.youtube.com/watch?v=yPQ2Gk33b1U&ab_channel=PrettyPrinted 
+- To validate user input I used the isdigit() function found from https://pynative.com/python-check-user-input-is-number-or-string/#:~:text=To%20check%20if%20the%20input%20string%20is%20an%20integer%20number,using%20the%20int()%20constructor.&text=To%20check%20if%20the%20input%20is%20a%20float%20number%2C%20convert,using%20the%20float()%20constructor.
 
 
 
