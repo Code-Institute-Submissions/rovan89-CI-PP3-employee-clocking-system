@@ -129,6 +129,8 @@ def employee_input():
 
     return int(employee_number)
 
+# This section validates user input
+
 
 def validate_employee_number_count(values):
     """
@@ -146,6 +148,7 @@ def validate_employee_number_count(values):
 
     return True
 
+
 def checks_for_empty_input(values):
     """
     Rasises ValueError if input in empty.
@@ -155,11 +158,16 @@ def checks_for_empty_input(values):
             raise ValueError(
                 f"An empty input is not valid"
             )
+        elif values.strip().isdigit():
+             raise ValueError(
+                f"Numbers are not a valid input"
+            )
     except ValueError as e:
         print(f"\nInvalid entry: {e}, please try again\n ")
         return False
 
     return True
+
 
 def userFeedback():
     """
@@ -173,18 +181,6 @@ def userFeedback():
             print("\nInput is valid! \n")
             update_user_feedback_sheet(feedback)
             options_menu()
-    
-
-def update_user_feedback_sheet(user_fb):
-    """
-    This function updates the user_feedback_sheet in google sheets
-    """
-    print("Updating feedback worksheet...\n")
-    feedback_worksheet = SHEET.worksheet("user_feedback")
-    feedback_worksheet.append_row([user_fb])
-    print("Feedback worksheet updated successfully. \n")
-    
-
 
 # Find matching emplyee name to user entered employee number
 
@@ -252,12 +248,12 @@ def find_last_employee_entry(employee_number):
 def clock_out():
     """
     This function marks the current time and
-    and updates the currect loction on google sheets.
+    and updates on google sheets.
     """
-    col_count = find_last_employee_entry(employee_input())
+    row_count = find_last_employee_entry(employee_input())
     clock_out_time = clock_in_time()
     print("\nYou clocked out at: ", clock_out_time)
-    in_out_sheet.update(f"D{col_count}", clock_out_time)
+    in_out_sheet.update(f"D{row_count}", clock_out_time)
     options_menu()
 
 
@@ -266,12 +262,22 @@ def clock_out():
 
 def update_in_out_sheet(timestamp_in):
     """
-    Updates Google Sheets with given values.
+    Updates the employee in_out_sheet with given values in google sheets.
     """
     print("\nUpdating in_out_sheet clock-in time...")
     clocking_sheet = SHEET.worksheet("in_out_sheet")
     clocking_sheet.append_row(timestamp_in)
     print("\nClock in time updated successfully \n ")
+
+
+def update_user_feedback_sheet(user_fb):
+    """
+    This function updates the user_feedback_sheet in google sheets
+    """
+    print("Updating feedback worksheet...\n")
+    feedback_worksheet = SHEET.worksheet("user_feedback")
+    feedback_worksheet.append_row([user_fb])
+    print("Feedback worksheet updated successfully. \n")
 
 
 def transfer_of_data():
@@ -311,16 +317,31 @@ last_employee_in_employeeList = employeeList[-1]["employeeNumber"]
 add_one_to_employee_number = int(last_employee_in_employeeList+1)
 
 
+def new_employee_input():
+    """
+    This function takes requests the name of the new employee from the user.
+    It also checks if the input is valid.
+    """
+    while True:
+        entering_name = input("Please enter employee name: \n")
+
+        if checks_for_empty_input(entering_name):
+            print("\nInput is valid! \n")
+            return entering_name
+
+
 def add_new_employee():
     """
     This function adds a new employee.
     Once add the function opens the options menu again.
     """
-    entering_name = input("Please enter employee name: \n")
+    entering_name = new_employee_input()
     newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name)
     newEmployeedAdded.addingEmployeeDetails()
     print("\nNew employee added successfully: ", employeeList[-1])
     main()
+
+# Exit program
 
 
 def exit_program():
@@ -328,6 +349,8 @@ def exit_program():
     This function ends the running of the program.
     """
     sys.exit()
+
+# Run program
 
 
 def main():
