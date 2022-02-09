@@ -159,7 +159,7 @@ def checks_for_empty_input(values):
                 f"An empty input is not valid"
             )
         elif values.strip().isdigit():
-             raise ValueError(
+            raise ValueError(
                 f"Numbers are not a valid input"
             )
     except ValueError as e:
