@@ -7,24 +7,25 @@
 
 
 ## Tables of Contents
-1. [Project Goals](#project_goals)
-    1. [User Experience](#user_experience)
-    2. [Target Audience](#target_audience)
-    3. [User Stories](#user_stories)
-    4. [Business Owner Stories](#business_owner_stories)
-2. [Features](#fearutes)
-    1. [Options Menu](#options_menu)
-    2. [Clock-in](#clock_in)
-    3. [Clock-out](#clock_out)
-    4. [Exit](#exit)
-    5. [User Input Validation](#user_input_validation)
-3. [Languages](#languages)
-4. [Frameworks and Tools](#frameworks_and_tools)
-5. [Bugs](#bugs)
-6. [Testing](#testing)
-7. [Validator Testing](#validator_testing)
-8. [Deployment](#deployment)
-9. [Credits](#credits)
+1. [Project Goals](#project-goals)
+    1. [User Experience](#user-experience)
+    2. [Target Audience](#target-audience)
+    3. [User Stories](#user-stories)
+    4. [Business Owner Stories](#business-owner-stories)
+2. [Features](#features)
+    1. [Options Menu](#options-menu)
+    2. [Clock In](#clock-in)
+    3. [Clock Out](#clock-out)
+    4. [User Feedback](#user-feedback)
+    5. [Exit](#exit)
+3. [User Input Validation](#user-input-validation)
+4. [Languages](#languages)
+5. [Frameworks and Tools](#frameworks-and-tools)
+6. [Bugs](#bugs)
+7. [Testing](#testing)
+8. [Validator Testing](#validator-testing)
+9. [Deployment](#deployment)
+10. [Credits](#credits)
 
 ## Project Goals
 Employee Clock In System is a program that allows employees of a business to clock in and out. This facilitates the owners with the necessary data they need to track the employees' hours.
@@ -53,14 +54,14 @@ The user first decides which option they would like to do, then a google sheet i
 
 ![Options Menu Image](assets/images/readme_images/landing_menu.PNG)
 
-### Clock-in (Option One)
+### Clock In (Option One)
 - The clock-in option allows an existing employee to enter their employee number.
 - The nubmer runs through a validation function to check the correct lenght of the number entered.
 - This then creates a new row in the Google Sheet (employee_clocking_system) and inputs the employees number, name and time of clock in.
 
 ![Clockin system and results](assets/images/readme_images/clocking_in_system.PNG)
 
-### Clock-out (Option Two)
+### Clock Out (Option Two)
 -The clock-out option allows a user who has already clocked in to add a clock-out time to the row created in the clock-in section (Google Sheets)
 
 ![Clocking out](assets/images/readme_images/clocking_out.PNG)

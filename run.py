@@ -215,48 +215,6 @@ def itterate_through_employee_details(employee_number):
         else:
             continue
 
-# Clock in system
-
-
-def clock_in_time():
-    """
-    This function returns the current time.
-    """
-    time_now = datetime.now()
-    current_time = time_now.strftime("%H:%M")
-
-    return current_time
-
-
-def find_last_employee_entry(employee_number):
-    """
-    This function finds the row in Google Sheets of
-    number of the employee number that
-    was entered by the user
-    """
-    count = 1
-    new_data_set = data[1:]
-    for i in new_data_set:
-        count += 1
-        if employee_number is int(i[0]):
-
-            return count
-
-# Clock Out
-
-
-def clock_out():
-    """
-    This function marks the current time and
-    and updates on google sheets.
-    """
-    row_count = find_last_employee_entry(employee_input())
-    clock_out_time = clock_in_time()
-    print("\nYou clocked out at: ", clock_out_time)
-    in_out_sheet.update(f"D{row_count}", clock_out_time)
-    options_menu()
-
-
 # Update Google Sheets
 
 
@@ -341,6 +299,60 @@ def add_new_employee():
     print("\nNew employee added successfully: ", employeeList[-1])
     main()
 
+# Clock in system
+
+
+def clock_in_time():
+    """
+    This function returns the current time.
+    """
+    time_now = datetime.now()
+    current_time = time_now.strftime("%H:%M")
+
+    return current_time
+
+
+
+# Clock Out
+
+
+def clock_out():
+    """
+    This function marks the current time and
+    and updates on google sheets.
+    """
+   
+    row_count = find_last_employee_entry(employee_input())
+    print(row_count)
+    clock_out_time = clock_in_time()
+    print("\nYou clocked out at: ", clock_out_time)
+    print(row_count)
+    print(clock_out_time)
+    in_out_sheet.update(row_count, clock_out_time)
+    options_menu()
+
+def find_last_employee_entry(employee_number):
+    """
+    This function finds the row in Google Sheets of
+    number of the employee number that
+    was entered by the user
+    """
+    row_count = 1
+    values_list = in_out_sheet.col_values(1)
+    values_list = values_list[1:]
+    for val in values_list:
+        row_count += 1
+        cell_val = int(in_out_sheet.acell(f"A{row_count}").value)
+        print(">>>", cell_val, employee_number)
+        if int(cell_val) == employee_number:
+            print(">>>", type(cell_val), type(employee_number))
+            cell_location = f"D{row_count}"
+            print("Cell Val: ", cell_val)
+            return cell_location
+        else:
+            print("Not working!!!")
+
+print("***",find_last_employee_entry(employee_input()))
 # Exit program
 
 
