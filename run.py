@@ -83,7 +83,7 @@ def options_menu():
     print("3. Add new employee to system")
     print("4. Give Feedback")
     print("5. Exit program\n")
-    options = input("Please enter the number of your chosen option: \n")
+    options = options_input()
     if int(options) == 1:
         print("\n*************************************")
         print("           CLOCKING IN      ")
@@ -113,6 +113,12 @@ def options_menu():
     else:
         print("***Please enter a valid number***")
         options_menu()
+
+def options_input():
+    while False:
+        options = input("Please enter the number of your chosen option: \n")
+        checks_for_empty_input(options)
+    return options
 
 
 def employee_input():
@@ -158,7 +164,18 @@ def checks_for_empty_input(values):
             raise ValueError(
                 f"An empty input is not valid"
             )
-        elif values.strip().isdigit():
+    except ValueError as e:
+        print(f"\nInvalid entry: {e}, please try again\n ")
+        return False
+
+    return True
+
+def checks_if_input_is_a_digit(values):
+    """
+    Rasises ValueError if input in empty.
+    """
+    try:
+        if values.strip().isdigit():
             raise ValueError(
                 f"Numbers are not a valid input"
             )
@@ -168,7 +185,6 @@ def checks_for_empty_input(values):
 
     return True
 
-
 def userFeedback():
     """
     This function takes user feedback
@@ -177,7 +193,7 @@ def userFeedback():
 
         feedback = input("Please leave us your feedback: ")
 
-        if checks_for_empty_input(feedback):
+        if checks_for_empty_input(feedback) and checks_if_input_is_a_digit(feedback):
             print("\nInput is valid! \n")
             update_user_feedback_sheet(feedback)
             options_menu()

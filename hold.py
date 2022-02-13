@@ -11,3 +11,14 @@ def find_last_employee_entry(employee_number):
         if employee_number is int(i[0]):
 
             return count
+
+   for l, n in zip(list_of_employees_numbers(), itterates_employee_name()):
+        print("This is Num: ", employee_number)
+        print("This is L: ", l)
+        print("////////////")
+        if employee_number == int(l):
+            employee_details = [l, n]
+            print(employee_details)
+            return employee_details
+        else:
+            continue 
