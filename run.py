@@ -121,12 +121,10 @@ def options_input():
     """
     while True:
         options = input("Please enter the number of your chosen option: \n")
-        print(type(list_of_employees_numbers()))
+
         if checks_for_empty_input(options) and validate_options_number_count(options) and checks_for_string_input(options) and validate_check_for_special_char(options):
             print("\nInput is valid! \n")
             return options
-        
-
 
 
 def employee_input():
@@ -233,15 +231,14 @@ def validate_check_for_special_char(values):
     This function raises a value error if a special character has been entered
     """
     special_char = ["[" ,"]" ,"'" ,"@","_","!","$","%","^","&","*","(",")","<",">","?","/","|","}","{","~",":","",";","#","+","=","-", " ",'"',"£", "€",".", ","]
-    for i in special_char:
-        try:
-            if i is values:
-                raise ValueError(
-                f"Special characters are not a valid input"
-            )
-        except ValueError as e:
-            print(f"\nInvalid entry: {e}, please try again\n ")
-            return False
+    try:
+        if values in special_char:
+            raise ValueError(
+            f"Special characters are not a valid input"
+        )
+    except ValueError as e:
+        print(f"\nInvalid entry: {e}, please try again\n ")
+        return False
         
     return True
 
