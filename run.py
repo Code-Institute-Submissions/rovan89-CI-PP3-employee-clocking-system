@@ -1,6 +1,7 @@
 import gspread
 import sys
 import time
+import re
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
@@ -115,10 +116,13 @@ def options_menu():
         options_menu()
 
 def options_input():
-    while False:
+
+    while True:
         options = input("Please enter the number of your chosen option: \n")
-        checks_for_empty_input(options)
-    return options
+        if checks_for_empty_input(options) and validate_options_number_count(options) and checks_for_string_input(options) and validate_check_for_special_char(options):
+            print("\nInput is valid! \n")
+            return options
+
 
 
 def employee_input():
@@ -154,6 +158,36 @@ def validate_employee_number_count(values):
 
     return True
 
+def validate_options_number_count(values):
+    """
+    Rasises ValueError if value is not an int.
+    Checks if there is exactly 3 values.
+    """
+    try:
+        if len(values) != 1:
+            raise ValueError(
+                f"1 value is required, you provided {len(values)}"
+            )
+    except ValueError as e:
+        print(f"\nInvalid entry: {e}, please try again\n ")
+        return False
+
+    return True
+
+def checks_for_string_input(values):
+    """
+    Rasises ValueError if input in a alphabetic input.
+    """
+    try:
+        if values.isalpha():
+            raise ValueError(
+                f"An alphabetic input is not valid"
+            )
+    except ValueError as e:
+        print(f"\nInvalid entry: {e}, please try again\n ")
+        return False
+
+    return True
 
 def checks_for_empty_input(values):
     """
@@ -163,6 +197,10 @@ def checks_for_empty_input(values):
         if values == "":
             raise ValueError(
                 f"An empty input is not valid"
+            )
+        elif values == "":
+            raise ValueError(
+                f"A special character input is not valid"
             )
     except ValueError as e:
         print(f"\nInvalid entry: {e}, please try again\n ")
@@ -185,6 +223,22 @@ def checks_if_input_is_a_digit(values):
 
     return True
 
+
+def validate_check_for_special_char(values):
+    special_char = ["[" ,"]" ,"'" ,"@","_","!","$","%","^","&","*","(",")","<",">","?","/","|","}","{","~",":","",";","#","+","=","-", " "]
+    for i in special_char:
+        try:
+            if i is values:
+                raise ValueError(
+                f"Special characters are not a valid input"
+            )
+        except ValueError as e:
+            print(f"\nInvalid entry: {e}, please try again\n ")
+            return False
+        
+    return True
+
+
 def userFeedback():
     """
     This function takes user feedback
@@ -193,7 +247,7 @@ def userFeedback():
 
         feedback = input("Please leave us your feedback: ")
 
-        if checks_for_empty_input(feedback) and checks_if_input_is_a_digit(feedback):
+        if checks_for_empty_input(feedback) and checks_if_input_is_a_digit(feedback) and validate_check_for_special_char(feedback):
             print("\nInput is valid! \n")
             update_user_feedback_sheet(feedback)
             options_menu()
@@ -299,7 +353,7 @@ def new_employee_input():
     while True:
         entering_name = input("Please enter employee name: \n")
 
-        if checks_for_empty_input(entering_name):
+        if checks_for_empty_input(entering_name) and validate_check_for_special_char(entering_name) and checks_if_input_is_a_digit(entering_name):
             print("\nInput is valid! \n")
             return entering_name
 
@@ -310,6 +364,7 @@ def add_new_employee():
     Once add the function opens the options menu again.
     """
     entering_name = new_employee_input()
+    validate_check_for_special_char(entering_name)
     newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name)
     newEmployeedAdded.addingEmployeeDetails()
     print("\nNew employee added successfully: ", employeeList[-1])
@@ -368,7 +423,7 @@ def find_last_employee_entry(employee_number):
         else:
             print("Not working!!!")
 
-print("***",find_last_employee_entry(employee_input()))
+
 # Exit program
 
 
