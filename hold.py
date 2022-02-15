@@ -1,6 +1,7 @@
 import gspread
 import sys
 import time
+import re
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
@@ -84,7 +85,6 @@ def options_menu():
     print("4. Give Feedback")
     print("5. Exit program\n")
     options = options_input()
-    print(">>>", type(options))
     if int(options) == 1:
         print("\n*************************************")
         print("           CLOCKING IN      ")
@@ -116,29 +116,31 @@ def options_menu():
         options_menu()
 
 def options_input():
-
+    """
+    This function takes the users' input from the options menu and validates that input.
+    """
     while True:
         options = input("Please enter the number of your chosen option: \n")
-        if checks_for_empty_input(options) and validate_options_number_count(options) and checks_for_string_input(options):
+
+        if checks_for_empty_input(options) and validate_options_number_count(options) and checks_for_string_input(options) and validate_check_for_special_char(options):
             print("\nInput is valid! \n")
             return options
-    
 
 
 def employee_input():
     """
-    Takes user input (Employee number)
+    Takes users' employee number input
     """
     while True:
 
-        employee_number = input("Please enter you employee number: \n")
+        employee_number = input("Please enter your employee number: \n")
+        employee_num_list = list_of_employees_numbers()
 
-        if validate_employee_number_count(employee_number):
+        if validate_employee_number_count(employee_number) and int(employee_number) in employee_num_list:
             print("Employee number is valid!")
-            break
-
-    return int(employee_number)
-
+            return int(employee_number)
+        else:
+            print("This is not an employee number\n")
 # This section validates user input
 
 
@@ -161,7 +163,7 @@ def validate_employee_number_count(values):
 def validate_options_number_count(values):
     """
     Rasises ValueError if value is not an int.
-    Checks if there is exactly 3 values.
+    Checks if there is exactly 1 value.
     """
     try:
         if len(values) != 1:
@@ -176,7 +178,7 @@ def validate_options_number_count(values):
 
 def checks_for_string_input(values):
     """
-    Rasises ValueError if input in a alphabetic input.
+    Rasises ValueError if input is a alphabetic input.
     """
     try:
         if values.isalpha():
@@ -210,7 +212,7 @@ def checks_for_empty_input(values):
 
 def checks_if_input_is_a_digit(values):
     """
-    Rasises ValueError if input in empty.
+    Rasises ValueError if input is a number.
     """
     try:
         if values.strip().isdigit():
@@ -223,6 +225,24 @@ def checks_if_input_is_a_digit(values):
 
     return True
 
+
+def validate_check_for_special_char(values):
+    """
+    This function raises a value error if a special character has been entered
+    """
+    special_char = ["[" ,"]" ,"'" ,"@","_","!","$","%","^","&","*","(",")","<",">","?","/","|","}","{","~",":","",";","#","+","=","-", " ",'"',"£", "€",".", ","]
+    try:
+        if values in special_char:
+            raise ValueError(
+            f"Special characters are not a valid input"
+        )
+    except ValueError as e:
+        print(f"\nInvalid entry: {e}, please try again\n ")
+        return False
+        
+    return True
+
+
 def userFeedback():
     """
     This function takes user feedback
@@ -231,7 +251,7 @@ def userFeedback():
 
         feedback = input("Please leave us your feedback: ")
 
-        if checks_for_empty_input(feedback) and checks_if_input_is_a_digit(feedback):
+        if checks_for_empty_input(feedback) and checks_if_input_is_a_digit(feedback) and validate_check_for_special_char(feedback):
             print("\nInput is valid! \n")
             update_user_feedback_sheet(feedback)
             options_menu()
@@ -337,7 +357,7 @@ def new_employee_input():
     while True:
         entering_name = input("Please enter employee name: \n")
 
-        if checks_for_empty_input(entering_name):
+        if checks_for_empty_input(entering_name) and validate_check_for_special_char(entering_name) and checks_if_input_is_a_digit(entering_name):
             print("\nInput is valid! \n")
             return entering_name
 
@@ -348,6 +368,7 @@ def add_new_employee():
     Once add the function opens the options menu again.
     """
     entering_name = new_employee_input()
+    validate_check_for_special_char(entering_name)
     newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name)
     newEmployeedAdded.addingEmployeeDetails()
     print("\nNew employee added successfully: ", employeeList[-1])
@@ -377,11 +398,8 @@ def clock_out():
     """
    
     row_count = find_last_employee_entry(employee_input())
-    print(row_count)
     clock_out_time = clock_in_time()
     print("\nYou clocked out at: ", clock_out_time)
-    print(row_count)
-    print(clock_out_time)
     in_out_sheet.update(row_count, clock_out_time)
     options_menu()
 
@@ -397,16 +415,12 @@ def find_last_employee_entry(employee_number):
     for val in values_list:
         row_count += 1
         cell_val = int(in_out_sheet.acell(f"A{row_count}").value)
-        print(">>>", cell_val, employee_number)
         if int(cell_val) == employee_number:
-            print(">>>", type(cell_val), type(employee_number))
             cell_location = f"D{row_count}"
-            print("Cell Val: ", cell_val)
             return cell_location
-        else:
-            print("Not working!!!")
 
-print("***",find_last_employee_entry(employee_input()))
+
+
 # Exit program
 
 
