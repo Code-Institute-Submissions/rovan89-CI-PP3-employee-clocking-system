@@ -136,9 +136,10 @@ def employee_input():
         employee_number = input("Please enter your employee number: \n")
         employee_num_list = list_of_employees_numbers()
 
-        if validate_employee_number_count(employee_number) and int(employee_number) in employee_num_list:
-            print("Employee number is valid!")
-            return int(employee_number)
+        if validate_employee_number_count(employee_number) and validate_check_for_special_char(employee_number):
+            if int(employee_number) in employee_num_list:
+                print("Employee number is valid!")
+                return int(employee_number)
         else:
             print("This is not an employee number\n")
 # This section validates user input
@@ -230,11 +231,11 @@ def validate_check_for_special_char(values):
     """
     This function raises a value error if a special character has been entered
     """
-    special_char = ["[" ,"]" ,"'" ,"@","_","!","$","%","^","&","*","(",")","<",">","?","/","|","}","{","~",":","",";","#","+","=","-", " ",'"',"£", "€",".", ","]
+    
     try:
-        if values in special_char:
+        if values.isnumeric() == False:
             raise ValueError(
-            f"Special characters are not a valid input"
+            f"This is not a correct value"
         )
     except ValueError as e:
         print(f"\nInvalid entry: {e}, please try again\n ")
@@ -242,6 +243,20 @@ def validate_check_for_special_char(values):
         
     return True
 
+def validate_check_for_special_true_return(values):
+    """
+    This function raises a value error if a special character has been entered
+    """
+    
+    try:
+        if values.isnumeric() == False:
+            raise ValueError(
+            f"This is not a correct value"
+        )
+    except ValueError as e:
+        print(f"\nInvalid entry: {e}, please try again\n ")
+        return True
+        
 
 def userFeedback():
     """
@@ -357,7 +372,7 @@ def new_employee_input():
     while True:
         entering_name = input("Please enter employee name: \n")
 
-        if checks_for_empty_input(entering_name) and validate_check_for_special_char(entering_name) and checks_if_input_is_a_digit(entering_name):
+        if checks_for_empty_input(entering_name) and checks_if_input_is_a_digit(entering_name) and validate_check_for_special_true_return(entering_name):
             print("\nInput is valid! \n")
             return entering_name
 
@@ -368,7 +383,6 @@ def add_new_employee():
     Once add the function opens the options menu again.
     """
     entering_name = new_employee_input()
-    validate_check_for_special_char(entering_name)
     newEmployeedAdded = newEmployee(add_one_to_employee_number, entering_name)
     newEmployeedAdded.addingEmployeeDetails()
     print("\nNew employee added successfully: ", employeeList[-1])

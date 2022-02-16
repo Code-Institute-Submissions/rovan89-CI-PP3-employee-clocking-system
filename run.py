@@ -233,9 +233,9 @@ def validate_check_for_special_char(values):
     """
     
     try:
-        if values.isnumeric() == False:
+        if values.isalnum() == False:
             raise ValueError(
-            f"This is not a correct value"
+            f"Cannot accept speial characters or spaces"
         )
     except ValueError as e:
         print(f"\nInvalid entry: {e}, please try again\n ")
@@ -243,20 +243,6 @@ def validate_check_for_special_char(values):
         
     return True
 
-def validate_check_for_special_true_return(values):
-    """
-    This function raises a value error if a special character has been entered
-    """
-    
-    try:
-        if values.isnumeric() == False:
-            raise ValueError(
-            f"This is not a correct value"
-        )
-    except ValueError as e:
-        print(f"\nInvalid entry: {e}, please try again\n ")
-        return True
-        
 
 def userFeedback():
     """
@@ -372,7 +358,7 @@ def new_employee_input():
     while True:
         entering_name = input("Please enter employee name: \n")
 
-        if checks_for_empty_input(entering_name) and checks_if_input_is_a_digit(entering_name) and validate_check_for_special_true_return(entering_name):
+        if checks_for_empty_input(entering_name) and checks_if_input_is_a_digit(entering_name) and validate_check_for_special_char(entering_name):
             print("\nInput is valid! \n")
             return entering_name
 
