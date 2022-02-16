@@ -82,8 +82,7 @@ def options_menu():
     print("1. Clock in")
     print("2. Clock out")
     print("3. Add new employee to system")
-    print("4. Give Feedback")
-    print("5. Exit program\n")
+    print("4. Exit program\n")
     options = options_input()
     if int(options) == 1:
         print("\n*************************************")
@@ -101,11 +100,6 @@ def options_menu():
         print("*************************************\n")
         add_new_employee()
     elif int(options) == 4:
-        print("\n*************************************")
-        print("         Give Feedback    ")
-        print("*************************************\n")
-        userFeedback()
-    elif int(options) == 5:
         print("\n************************************")
         print("         EXITING PROGRAM    ")
         print("************************************\n")
@@ -115,16 +109,18 @@ def options_menu():
         print("***Please enter a valid number***")
         options_menu()
 
+
 def options_input():
     """
-    This function takes the users' input from the options menu and validates that input.
+    This function takes the users' input from the
+    options menu and validates that input.
     """
     while True:
-        options = input("Please enter the number of your chosen option: \n")
+        option = input("Please enter the number of your chosen option: \n")
 
-        if checks_for_empty_input(options) and validate_options_number_count(options) and checks_for_string_input(options) and validate_check_for_special_char(options):
+        if val_opt_num(option) and val_alpha(option) and val_special(option):
             print("\nInput is valid! \n")
-            return options
+            return option
 
 
 def employee_input():
@@ -133,19 +129,18 @@ def employee_input():
     """
     while True:
 
-        employee_number = input("Please enter your employee number: \n")
+        em_num = input("Please enter your employee number: \n")
         employee_num_list = list_of_employees_numbers()
 
-        if validate_employee_number_count(employee_number) and validate_check_for_special_char(employee_number):
-            if int(employee_number) in employee_num_list:
+        if val_emp_num(em_num) and val_alpha(em_num) and val_special(em_num):
+            if int(em_num) in employee_num_list:
                 print("Employee number is valid!")
-                return int(employee_number)
-        else:
-            print("This is not an employee number\n")
+                return int(em_num)
+
 # This section validates user input
 
 
-def validate_employee_number_count(values):
+def val_emp_num(values):
     """
     Rasises ValueError if value is not an int.
     Checks if there is exactly 3 values.
@@ -161,7 +156,8 @@ def validate_employee_number_count(values):
 
     return True
 
-def validate_options_number_count(values):
+
+def val_opt_num(values):
     """
     Rasises ValueError if value is not an int.
     Checks if there is exactly 1 value.
@@ -177,9 +173,11 @@ def validate_options_number_count(values):
 
     return True
 
-def checks_for_string_input(values):
+
+def val_alpha(values):
     """
-    Rasises ValueError if input is a alphabetic input.
+    Validates input and rasises ValueError if
+    input is a alphabetic input.
     """
     try:
         if values.isalpha():
@@ -192,26 +190,8 @@ def checks_for_string_input(values):
 
     return True
 
-def checks_for_empty_input(values):
-    """
-    Rasises ValueError if input in empty.
-    """
-    try:
-        if values == "":
-            raise ValueError(
-                f"An empty input is not valid"
-            )
-        elif values == "":
-            raise ValueError(
-                f"A special character input is not valid"
-            )
-    except ValueError as e:
-        print(f"\nInvalid entry: {e}, please try again\n ")
-        return False
 
-    return True
-
-def checks_if_input_is_a_digit(values):
+def val_is_digit(values):
     """
     Rasises ValueError if input is a number.
     """
@@ -227,20 +207,21 @@ def checks_if_input_is_a_digit(values):
     return True
 
 
-def validate_check_for_special_char(values):
+def val_special(values):
     """
-    This function raises a value error if a special character has been entered
+    This function validates the input and
+    raises a value error if a special character has
+    been entered
     """
-    
     try:
-        if values.isalnum() == False:
+        if values.isalnum() is False:
             raise ValueError(
-            f"Cannot accept speial characters or spaces"
-        )
+                f"Cannot accept speial characters or spaces"
+            )
     except ValueError as e:
         print(f"\nInvalid entry: {e}, please try again\n ")
         return False
-        
+
     return True
 
 
@@ -252,7 +233,7 @@ def userFeedback():
 
         feedback = input("Please leave us your feedback: ")
 
-        if checks_for_empty_input(feedback) and checks_if_input_is_a_digit(feedback) and validate_check_for_special_char(feedback):
+        if val_is_digit(feedback) and val_special(feedback):
             print("\nInput is valid! \n")
             update_user_feedback_sheet(feedback)
             options_menu()
@@ -358,7 +339,7 @@ def new_employee_input():
     while True:
         entering_name = input("Please enter employee name: \n")
 
-        if checks_for_empty_input(entering_name) and checks_if_input_is_a_digit(entering_name) and validate_check_for_special_char(entering_name):
+        if val_is_digit(entering_name) and val_special(entering_name):
             print("\nInput is valid! \n")
             return entering_name
 
@@ -386,8 +367,6 @@ def clock_in_time():
 
     return current_time
 
-
-
 # Clock Out
 
 
@@ -396,12 +375,12 @@ def clock_out():
     This function marks the current time and
     and updates on google sheets.
     """
-   
     row_count = find_last_employee_entry(employee_input())
     clock_out_time = clock_in_time()
     print("\nYou clocked out at: ", clock_out_time)
     in_out_sheet.update(row_count, clock_out_time)
     options_menu()
+
 
 def find_last_employee_entry(employee_number):
     """
@@ -418,8 +397,6 @@ def find_last_employee_entry(employee_number):
         if int(cell_val) == employee_number:
             cell_location = f"D{row_count}"
             return cell_location
-
-
 
 # Exit program
 
