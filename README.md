@@ -111,8 +111,10 @@ The user first decides which option they would like to do, then a google sheet i
 - Git
 
 ## Libraries 
-- The gspread library is used to interact with google sheets
-- The sys library is used for the exit function in the program
+- The gspread library is used to interact with google sheets.
+- The sys library is used for the exit function in the program.
+- The time library is used to make time stamps for the employees cloking in and out.
+
 ## Bugs
 | **Feature / Function** | **Expected Result** | **Actual Result** | **Action** |
 |-------------|------------|---------------------|-------------------|

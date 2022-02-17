@@ -1,7 +1,6 @@
 import gspread
 import sys
 import time
-import re
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
