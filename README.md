@@ -119,7 +119,7 @@ The user first decides which option they would like to do, then a google sheet i
 | **Feature / Function** | **Expected Result** | **Actual Result** | **Action** |
 |-------------|------------|---------------------|-------------------|
 | find_last_employee_entry()| It would count employee numbers | ValueError: invalid literal for int() | The first cell was a heading. This was fixed by using indexing to begin at the second cell [1:]|
-|transfer_of_data()| To revieve input from the user and update google sheets | TypeError: can only concatenate list (not "str") to list | To concatenate the two variables I needed to format the string type into a list. Example: csv_result = employee_details + [clockin_time]
+|transfer_of_data()| To revieve input from the user and update google sheets | TypeError: can only concatenate list (not "str") to list | To concatenate the two variables I needed to format the string type into a list. Example: csv_result = employee_details + clockin_time
 |userFeedback()| This function would take feedback from the user and update the user_feedback worksheet| gspread.exceptions.APIError: {'code': 400, 'message': 'Invalid value at \'data.values[0]\'| To change data to the correct data type the user input was passed into a list|
 
 ## Testing
