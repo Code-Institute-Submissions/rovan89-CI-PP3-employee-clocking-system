@@ -82,7 +82,8 @@ def options_menu():
     print("1. Clock in")
     print("2. Clock out")
     print("3. Add new employee to system")
-    print("4. Exit program\n")
+    print("4. Give Feedback")
+    print("5. Exit program\n")
     options = options_input()
     if int(options) == 1:
         print("\n*************************************")
@@ -100,6 +101,11 @@ def options_menu():
         print("*************************************\n")
         add_new_employee()
     elif int(options) == 4:
+        print("\n*************************************")
+        print("         Give Feedback    ")
+        print("*************************************\n")
+        userFeedback()
+    elif int(options) == 5:
         print("\n************************************")
         print("         EXITING PROGRAM    ")
         print("************************************\n")
@@ -142,6 +148,7 @@ def employee_input():
 
 def val_emp_num(values):
     """
+    Validates employee number input.
     Rasises ValueError if value is not an int.
     Checks if there is exactly 3 values.
     """
@@ -159,6 +166,7 @@ def val_emp_num(values):
 
 def val_opt_num(values):
     """
+    Validates options number input.
     Rasises ValueError if value is not an int.
     Checks if there is exactly 1 value.
     """
@@ -176,8 +184,9 @@ def val_opt_num(values):
 
 def val_alpha(values):
     """
-    Validates input and rasises ValueError if
-    input is a alphabetic input.
+    Validates alphabetic input.
+    Rasises ValueError if
+    input is not valid.
     """
     try:
         if values.isalpha():
@@ -193,6 +202,7 @@ def val_alpha(values):
 
 def val_is_digit(values):
     """
+    Validates digit inputs.
     Rasises ValueError if input is a number.
     """
     try:
@@ -233,7 +243,7 @@ def userFeedback():
 
         feedback = input("Please leave us your feedback: ")
 
-        if val_is_digit(feedback) and val_special(feedback):
+        if val_is_digit(feedback):
             print("\nInput is valid! \n")
             update_user_feedback_sheet(feedback)
             options_menu()

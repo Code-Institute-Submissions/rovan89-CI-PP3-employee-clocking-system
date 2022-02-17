@@ -86,9 +86,21 @@ The user first decides which option they would like to do, then a google sheet i
 
 ## User Input Validation 
 - The input validation checks has the user entered valid data and the correct amount of digits.
-- If the incorrect amount of digits is entered the user an error message will be displayed in the terminal
+- If the incorrect amount of digits is entered the user an error message will be displayed in the terminal.
 
-![User input validation](assets/images/readme_images/user_input_validation_count.PNG)
+![User input validation (Three digits)](assets/images/readme_images/user_input_validation_count.PNG)
+![User input validation (One digit)](assets/images/readme_images/user_input_validation_one_digit.PNG)
+
+- Input validation checks if alphabetical characters have been used.
+- If alphabetical characters are used instead of numbers an error message will be displayed in the terminal. 
+
+![User input validation (Alphabetical)](assets/images/readme_images/user_input_validation_alphabetical.PNG)
+
+- Input validation checks if special characters and spaces are used.
+- If special characters are used an error message will be displayed in the terminal. 
+
+![User input validation (Special characters)](assets/images/readme_images/special_character_validation.PNG)
+
 
 ## Languages
 - Python 3
