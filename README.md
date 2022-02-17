@@ -110,6 +110,9 @@ The user first decides which option they would like to do, then a google sheet i
 - Gitpod
 - Git
 
+## Libraries 
+- The gspread library is used to interact with google sheets
+- The sys library is used for the exit function in the program
 ## Bugs
 | **Feature / Function** | **Expected Result** | **Actual Result** | **Action** |
 |-------------|------------|---------------------|-------------------|
